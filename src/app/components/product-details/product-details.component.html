@@ -1,0 +1,54 @@
+<!-- <div class="container my-5" *ngIf="product">
+    <div class="row">
+        <div class="col-md-6">
+            <img [src]="product.image" class="img-fluid rounded" alt="{{ product.name }}">
+        </div>
+        <div class="col-md-6">
+            <h2>{{ product.name }}</h2>
+            <p>{{ product.description }}</p>
+            <h4 class="text-success">${{ product.price }}</h4>
+            <button class="btn btn-primary mt-3" (click)="addToCart(product)">Add to Cart</button>
+        </div>
+        <div class="mt-4">
+            <h5>Artist:</h5>
+            <div class="d-flex align-items-center">
+                <img [src]="artist.image" alt="{{ artist.name }}" width="50" height="50" class="rounded-circle me-2" />
+                <a [routerLink]="['/artist', artist.id]" class="fw-bold">
+                    {{ artist.name }}
+                </a>
+            </div>
+        </div>
+
+    </div>
+</div> -->
+<div class="container mt-4" *ngIf="product">
+    <div class="row">
+        <div class="col-md-6">
+            <img [src]="product.image" class="img-fluid rounded" alt="{{ product.name }}">
+        </div>
+        <div class="col-md-6">
+            <h2>{{ product.name }}</h2>
+            <p>{{ product.description }}</p>
+            <ul>
+                <li><strong>Scent:</strong> {{ product.scent }}</li>
+                <li><strong>Color:</strong> {{ product.color }}</li>
+                <li><strong>Shape:</strong> {{ product.shape }}</li>
+                <li><strong>Price:</strong> {{ product.price }} EGP</li>
+            </ul>
+
+            <hr>
+
+            <div *ngIf="artist">
+                <h5>Crafted by:</h5>
+                <a [routerLink]="['/artist', artist.id]" class="d-flex align-items-center text-decoration-none">
+                    <img [src]="artist.image" alt="{{ artist.name }}" width="50" class="rounded-circle me-2">
+                    <span>{{ artist.name }}</span>
+                </a>
+            </div>
+
+            <button class="btn btn-primary mt-3">Customize This Candle</button>
+            <button class="btn btn-success mt-3" (click)="addToCart()">Add to Cart</button>
+
+        </div>
+    </div>
+</div>

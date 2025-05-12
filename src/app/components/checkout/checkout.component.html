@@ -1,0 +1,47 @@
+<div class="container mt-4">
+    <h3>Checkout</h3>
+
+    <div *ngIf="cartItems().length === 0 && !submitted">
+        <p>Your cart is empty.</p>
+        <a routerLink="/" class="btn btn-secondary">Back to Shop</a>
+    </div>
+
+    <div *ngIf="cartItems().length > 0 && !submitted">
+        <h5 class="mt-4">Items in your cart:</h5>
+        <ul class="list-group mb-3">
+            <li *ngFor="let item of cartItems()" class="list-group-item d-flex justify-content-between">
+                <div>{{ item.name }} (x{{ item.quantity }})</div>
+                <strong>{{ item.price * item.quantity | currency }}</strong>
+            </li>
+        </ul>
+        <h5>Total: {{ total() | currency }}</h5>
+
+        <form [formGroup]="checkoutForm" (ngSubmit)="placeOrder()" class="mt-4">
+            <div class="mb-3">
+                <label>Full Name</label>
+                <input formControlName="fullName" type="text" class="form-control" />
+            </div>
+            <div class="mb-3">
+                <label>Address</label>
+                <input formControlName="address" type="text" class="form-control" />
+            </div>
+            <div class="mb-3">
+                <label>City</label>
+                <input formControlName="city" type="text" class="form-control" />
+            </div>
+            <div class="mb-3">
+                <label>Email</label>
+                <input formControlName="email" type="email" class="form-control" />
+            </div>
+
+            <button type="submit" class="btn btn-primary" [disabled]="checkoutForm.invalid">
+                Confirm Order
+            </button>
+        </form>
+    </div>
+
+    <div *ngIf="submitted" class="alert alert-success mt-4">
+        <h5>Thank you! Your order has been placed. 🎉</h5>
+        <a routerLink="/" class="btn btn-success mt-3">Back to Home</a>
+    </div>
+</div>

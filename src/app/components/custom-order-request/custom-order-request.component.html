@@ -1,0 +1,65 @@
+<div class="container min-vh-100 mt-4">
+    <div class="row g-4">
+        <div class="col-md-4">
+            <img src="../../../assets/images/backage2.jpg" class="custom-order-view-img rounded-4 img-fluid" alt="">
+        </div>
+        <div class="col-md-8 p-4">
+            <h3>Custom Candle Order</h3>
+            <div class="custom-order-form">
+                <form [formGroup]="orderForm" (ngSubmit)="submitForm()" class="mt-4">
+                    <div class="mb-3">
+                        <label>Name</label>
+                        <input type="text" formControlName="name" class="form-control">
+                    </div>
+
+                    <div class="mb-3">
+                        <label>Email</label>
+                        <input type="email" formControlName="email" class="form-control">
+                    </div>
+
+                    <div class="mb-3">
+                        <label>Scent</label>
+                        <select formControlName="scent" class="form-select">
+                            <option *ngFor="let s of scents" [value]="s">{{ s }}</option>
+                        </select>
+                    </div>
+
+                    <div class="d-flex align-items-center gap-3 mb-3">
+                        <div class="shape w-50">
+                            <label>Shape</label>
+                            <select formControlName="shape" class="form-select">
+                                <option *ngFor="let s of shapes" [value]="s">{{ s }}</option>
+                            </select>
+
+                        </div>
+                        <div class="color w-50">
+                            <div class="">
+                                <label for="color">Color</label>
+                                <input type="color" formControlName="color" id="color" [(ngModel)]="selectedColor"
+                                    class=" d-block w-100 border-0 rounded-3 form-control-color">
+                                <!-- <select formControlName="color" class="form-select">
+                                    <option *ngFor="let c of colors" [value]="c">{{ c }}</option>
+                                </select> -->
+                            </div>
+
+                        </div>
+                    </div>
+
+
+                    <div class="mb-3">
+                        <label>Additional Notes</label>
+                        <textarea formControlName="notes" class="form-control" rows="3"></textarea>
+                    </div>
+
+                    <button class="btn btn-primary" type="submit" [disabled]="orderForm.invalid">Submit Order</button>
+                </form>
+
+                <div *ngIf="submitted" class="alert alert-success mt-4">
+                    Your custom candle request has been submitted! 🕯️✨
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>

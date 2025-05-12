@@ -1,1 +1,143 @@
-/* You can add global styles to this file, and also import other style files */
+// Global Variables
+$primary-bg-color: #2a0606; // Dark background
+$accent-color: #f1e0d6; // Light beige accent for button
+$highlight-color: #f2b8a0; // Soft pink for hover effects
+// ////////////////////////////
+$color-matcha: #809671;
+$color-almond: #E5E0D8;
+$color-pistache: #B3B792;
+$color-chai: #D2AB80;
+$color-carob: #725C3A;
+$color-vanilla: #E5D2B8;
+
+// Neutrals
+$color-white: #ffffff;
+$color-black: #000000;
+
+
+//global styles
+.form-control,
+input,
+select {
+    background-color: $color-almond !important;
+}
+
+// Hero Section
+.home-hero {
+    // background-color: $primary-bg-color;
+    // background: linear-gradient(to left, #000000, #3e2d25);
+    // background-color: $color-matcha ;
+    background: radial-gradient(125% 125% at 50% 10%,
+            rgba(128, 150, 113, 0.67) 40%,
+            rgba(229, 210, 184, 1) 100%);
+
+    // background: radial-gradient(150% 80% at 25% 75%,
+    //         rgba(247, 179, 137, 0.874) 40%,
+    //         rgb(90, 117, 75) 100%);
+    color: #725C3A;
+
+    .display-4,
+    .nav-brand {
+        font-family: 'Playfair Display', serif;
+        font-size: 3.5rem;
+        color: $color-vanilla;
+    }
+
+    .btn-light {
+        background-color: $accent-color;
+        border: none;
+        color: #333;
+        border-radius: 25px;
+        padding: 15px 25px;
+        font-size: 1.25rem;
+
+        &:hover {
+            background-color: $color-chai;
+            color: white;
+        }
+    }
+
+    .badge {
+        background-color: $color-pistache;
+        // border: none;
+        color: $color-carob;
+        font-size: 1rem;
+        padding: 8px 15px;
+        margin: 5px;
+        border-radius: 25px;
+        transition: all 0.5s;
+
+        &:hover {
+            border: 1px solid $color-almond;
+            background-color: transparent;
+        }
+    }
+
+    .card {
+        background-color: $color-vanilla;
+        color: $color-carob;
+        border: none;
+        border-radius: 15px;
+        overflow: hidden;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        height: 100%;
+
+        &:hover {
+            // transform: scale(1.05);
+            box-shadow: 0 8px 16px rgba(13, 68, 24, 0.3);
+        }
+
+        .card-body {
+            text-align: center;
+
+            h6 {
+                font-size: 1.2rem;
+                font-weight: bold;
+            }
+
+            .btn-outline-light {
+                color: white;
+                background-color: $color-chai;
+                border: none;
+
+                &:hover {
+                    color: $color-chai;
+                    border: 1px solid $color-chai;
+
+                    background-color: transparent;
+                }
+            }
+        }
+
+        img {
+            transition: transform 0.3s ease-in-out;
+
+            &:hover {
+                transform: scale(1.1);
+            }
+        }
+    }
+}
+
+
+// Responsive Adjustments
+// @media (max-width: 768px) {
+//     .home-hero {
+//         .display-4 {
+//             font-size: 2.5rem;
+//         }
+
+//         .btn-light {
+//             font-size: 1rem;
+//             padding: 12px 20px;
+//         }
+
+//         .badge {
+//             font-size: 0.85rem;
+//         }
+
+//         .card {
+//             margin-bottom: 20px;
+//         }
+//     }
+// }
