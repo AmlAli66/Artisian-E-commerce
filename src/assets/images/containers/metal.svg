@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="200" height="200" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Metal Container -->
+  <path d="M60 50 L140 50 L135 180 L65 180 Z" fill="#E8E8E8" stroke="#D4D4D4" stroke-width="2"/>
+  
+  <!-- Metal Texture -->
+  <path d="M70 60 L130 60" stroke="#D4D4D4" stroke-width="1"/>
+  <path d="M69 70 L131 70" stroke="#D4D4D4" stroke-width="1"/>
+  <path d="M68 80 L132 80" stroke="#D4D4D4" stroke-width="1"/>
+  <path d="M67 90 L133 90" stroke="#D4D4D4" stroke-width="1"/>
+  <path d="M66 100 L134 100" stroke="#D4D4D4" stroke-width="1"/>
+  <path d="M66 110 L134 110" stroke="#D4D4D4" stroke-width="1"/>
+  <path d="M65 120 L135 120" stroke="#D4D4D4" stroke-width="1"/>
+  <path d="M65 130 L135 130" stroke="#D4D4D4" stroke-width="1"/>
+  <path d="M65 140 L135 140" stroke="#D4D4D4" stroke-width="1"/>
+  <path d="M65 150 L135 150" stroke="#D4D4D4" stroke-width="1"/>
+  <path d="M65 160 L135 160" stroke="#D4D4D4" stroke-width="1"/>
+  <path d="M65 170 L135 170" stroke="#D4D4D4" stroke-width="1"/>
+  
+  <!-- Metal Rim -->
+  <path d="M58 50 L142 50" stroke="#D4D4D4" stroke-width="3" stroke-linecap="round"/>
+  
+  <!-- Metal Shine -->
+  <path d="M70 70 L80 70 L75 160 L65 160 Z" fill="white" opacity="0.1"/>
+</svg> 

@@ -3,4 +3,6 @@ export interface Artist {
     name: string;
     bio: string;
     imageUrl: string;
+    expertise: string[];
+    featured?: boolean;
 }

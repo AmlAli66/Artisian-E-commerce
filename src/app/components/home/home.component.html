@@ -1,20 +1,20 @@
-<div class="container-fluid  ">
+<!-- <div class="container-fluid  ">
     <div class="row ">
-        <!-- Left Content -->
+        Left Content
         <div class="col-lg-8 text-center text-lg-start p-5">
             <h1 class="display-4 fw-bold mb-3" style="font-family: 'Playfair Display', serif;">
                 Light Up Your <br> Space With Comfort
             </h1>
             <button class="btn btn-light btn-lg rounded-pill px-4 shadow-sm">Buy Now</button>
 
-            <!-- Features -->
+            Features
             <div class="d-flex flex-wrap gap-3 mt-5">
                 <span class="   badge py-2 px-3">🧴 Cruelty Free</span>
                 <span class=" badge py-2 px-3">🌱 Organic</span>
                 <span class="badge py-2 px-3">🕯️ Paraffin Free</span>
             </div>
 
-            <!-- Category Cards -->
+            Category Cards
             <div class="row mt-5">
                 <div class="col-md-6">
                     <div class="card rounded-3  d-flex flex-row justify-content-center align-items-center ">
@@ -45,8 +45,8 @@
             </div>
         </div>
 
-        <!-- Right Image Grid -->
-        <div class="col-lg-4 d-none d-lg-block">
+        Right Image Grid
+        <div class="col-lg-4 d-none d-lg-block  grid-section ">
             <div class="row g-3">
                 <div class="col-6">
                     <img src="../../../assets/images/candle6.jpeg" class="img-fluid rounded shadow" />
@@ -60,5 +60,239 @@
                 </div>
             </div>
         </div>
+        <section class="why-choose py-5 text-center bg-secondary text-dark">
+            <div class="container">
+                <h2 class="mb-4">Why Choose Us?</h2>
+                <div class="row">
+                    <div class="col-md-4">
+                        <img src="assets/icons/handcrafted.svg" height="50" alt="handcrafted" />
+                        <p class="mt-2">Artisan Handcrafted Candles</p>
+                    </div>
+                    <div class="col-md-4">
+                        <img src="assets/icons/custom.svg" height="50" alt="custom order" />
+                        <p class="mt-2">Custom Order Options</p>
+                    </div>
+                    <div class="col-md-4">
+                        <img src="assets/icons/scent.svg" height="50" alt="unique scents" />
+                        <p class="mt-2">Unique Scents Blended with Love</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="cta py-5 text-center">
+            <h2>Design Your Custom Candle</h2>
+            <p>Choose your scent, size, and style—made just for you.</p>
+            <button class="btn btn-accent btn-lg">Start Custom Order</button>
+        </section>
+    </div>
+</div> -->
+
+<!-- Home Component -->
+<!-- <section class="hero text-center d-flex flex-column justify-content-center align-items-center">
+    <h1 class="display-4">Welcome to Scented Reverie</h1>
+    <p class="lead">Handcrafted candles that awaken your senses.</p>
+    <button class="btn btn-lg btn-primary mt-3">Explore Our Collection</button>
+</section>
+
+<section class="featured py-5 container">
+    <h2 class="text-center mb-4">Featured Candles</h2>
+    <div class="row">
+        <div class="col-md-4 mb-4" *ngFor="let product of featuredProducts">
+            <div class="card product-card animate__animated animate__fadeInUp">
+                <img [src]="product.image" class="card-img-top" alt="Candle image" />
+                <div class="card-body">
+                    <h5 class="card-title">{{ product.name }}</h5>
+                    <p class="card-text">{{ product.description }}</p>
+                    <button class="btn btn-outline-primary">View Details</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="why-choose py-5 text-center bg-secondary text-dark">
+    <div class="container">
+        <h2 class="mb-4">Why Choose Us?</h2>
+        <div class="row">
+            <div class="col-md-4">
+                <img src="assets/icons/handcrafted.svg" height="50" alt="handcrafted" />
+                <p class="mt-2">Artisan Handcrafted Candles</p>
+            </div>
+            <div class="col-md-4">
+                <img src="assets/icons/custom.svg" height="50" alt="custom order" />
+                <p class="mt-2">Custom Order Options</p>
+            </div>
+            <div class="col-md-4">
+                <img src="assets/icons/scent.svg" height="50" alt="unique scents" />
+                <p class="mt-2">Unique Scents Blended with Love</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="cta py-5 text-center">
+    <h2>Design Your Custom Candle</h2>
+    <p>Choose your scent, size, and style—made just for you.</p>
+    <button class="btn btn-accent btn-lg">Start Custom Order</button>
+</section> -->
+
+<div class="hero-section">
+    <div class="container">
+        <div class="row align-items-center ">
+            <div class="col-lg-6 hero-content">
+                <h1 class="display-3 mb-4 animate-fade-in">Welcome to <br><span class="brand-text">Scented
+                        Reverie</span></h1>
+                <p class="lead mb-4 animate-fade-in-delay">Discover our artisanal collection of hand-crafted candles,
+                    where each piece tells a unique story through enchanting fragrances and elegant designs.</p>
+                <div class="hero-buttons animate-fade-in-delay-2">
+                    <button class="btn btn-primary me-3" routerLink="/products">Explore Collection</button>
+                    <button class="btn btn-outline-primary" routerLink="/custom-order">Custom Order</button>
+                </div>
+                <div class="features mt-5 animate-fade-in-delay-3">
+                    <span class="feature-badge">
+                        <i class="fas fa-leaf"></i> Eco-Friendly
+                    </span>
+                    <span class="feature-badge">
+                        <i class="fas fa-heart"></i> Handcrafted
+                    </span>
+                    <span class="feature-badge">
+                        <i class="fas fa-star"></i> Premium Quality
+                    </span>
+                </div>
+            </div>
+            <div class="col-lg-6 hero-image">
+                <div class="image-grid">
+                    <img src="assets/images/candle1.jpeg" alt="Luxury Candle" class="grid-img animate-float">
+                    <img src="assets/images/candle2.jpeg" alt="Artisan Candle" class="grid-img animate-float delay-1">
+                    <img src="assets/images/candle3.jpeg" alt="Custom Candle" class="grid-img animate-float delay-2">
+                </div>
+            </div>
+        </div>
     </div>
 </div>
+
+<section class="featured-products py-5">
+    <div class="container">
+        <h2 class="text-center mb-5">Featured Collections</h2>
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="collection-card">
+                    <div class="card-image">
+                        <img src="assets/images/candle6.jpeg" alt="Signature Collection">
+                    </div>
+                    <div class="card-content">
+                        <h3>Signature Collection</h3>
+                        <p>Our timeless classics with beloved scents</p>
+                        <button class="btn btn-outline-primary" routerLink="/products">Shop Now</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="collection-card">
+                    <div class="card-image">
+                        <img src="assets/images/candle7.jpeg" alt="Seasonal Editions">
+                    </div>
+                    <div class="card-content">
+                        <h3>Seasonal Editions</h3>
+                        <p>Limited edition scents for every season</p>
+                        <button class="btn btn-outline-primary" routerLink="/products">Explore</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="collection-card">
+                    <div class="card-image">
+                        <img src="assets/images/candle8.jpeg" alt="Gift Sets">
+                    </div>
+                    <div class="card-content">
+                        <h3>Gift Sets</h3>
+                        <p>Curated collections for special occasions</p>
+                        <button class="btn btn-outline-primary" routerLink="/products">View Sets</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="artisan-feature py-5 bg-light">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-md-6">
+                <div class="artisan-image-container">
+                    <img src="assets/images/decor1.jpg" alt="Artisan Crafting Process"
+                        class="img-fluid rounded-3 main-image">
+                    <div class="process-images mt-4 row g-3">
+                        <div class="col-4">
+                            <img src="assets/images/process1.jpg" alt="Wax Selection" class="img-fluid rounded-3"
+                                title="Premium Wax Selection">
+                        </div>
+                        <div class="col-4">
+                            <img src="assets/images/process2.jpg" alt="Fragrance Blending" class="img-fluid rounded-3"
+                                title="Fragrance Blending">
+                        </div>
+                        <div class="col-4">
+                            <img src="assets/images/process3.jpg" alt="Final Touches" class="img-fluid rounded-3"
+                                title="Finishing Details">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <span class="craft-badge">Artisanal Excellence</span>
+                <h2 class="mb-4">The Art of Candle Making</h2>
+                <p class="lead mb-4">At Scented Reverie, each candle is a masterpiece of craftsmanship, created through
+                    a meticulous process that honors traditional techniques while embracing modern sustainability.</p>
+
+                <div class="crafting-process">
+                    <div class="process-step">
+                        <i class="fas fa-seedling text-primary"></i>
+                        <div class="step-content">
+                            <h4>Sustainable Materials</h4>
+                            <p>We carefully source eco-friendly soy and beeswax, supporting local suppliers and ensuring
+                                the highest quality ingredients.</p>
+                        </div>
+                    </div>
+
+                    <div class="process-step">
+                        <i class="fas fa-mortar-pestle text-primary"></i>
+                        <div class="step-content">
+                            <h4>Artisanal Blending</h4>
+                            <p>Our master craftspeople blend unique fragrances using essential oils and natural
+                                botanicals, creating signature scents that tell a story.</p>
+                        </div>
+                    </div>
+
+                    <div class="process-step">
+                        <i class="fas fa-hand-holding-heart text-primary"></i>
+                        <div class="step-content">
+                            <h4>Handcrafted Care</h4>
+                            <p>Each candle is hand-poured in small batches, ensuring perfect consistency and attention
+                                to detail in every piece.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-4">
+                    <button class="btn btn-primary me-3" routerLink="/our-process">Explore Our Process</button>
+                    <button class="btn btn-outline-primary" routerLink="/custom-order">Create Custom Order</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="newsletter-section py-5">
+    <div class="container text-center">
+        <h2 class="mb-4">Join Our Community</h2>
+        <p class="lead mb-4">Subscribe to receive updates on new collections, special offers, and artisan stories.</p>
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="input-group mb-3">
+                    <input type="email" class="form-control" placeholder="Enter your email">
+                    <button class="btn btn-primary" type="button">Subscribe</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

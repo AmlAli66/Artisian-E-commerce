@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="200" height="200" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Glass Container -->
+  <path d="M60 50 L140 50 L130 180 L70 180 Z" fill="rgba(255,255,255,0.8)" stroke="#D4D4D4" stroke-width="2"/>
+  
+  <!-- Glass Reflections -->
+  <path d="M70 60 L80 60 L75 170 L65 170 Z" fill="white" opacity="0.3"/>
+  <path d="M120 60 L130 60 L125 170 L115 170 Z" fill="white" opacity="0.2"/>
+  
+  <!-- Glass Rim -->
+  <path d="M58 50 L142 50" stroke="#D4D4D4" stroke-width="3" stroke-linecap="round"/>
+</svg> 

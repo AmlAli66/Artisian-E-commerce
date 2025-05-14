@@ -1,35 +1,383 @@
 {
+    "categories": [
+      {
+        "id": 1,
+        "name": "Classic Collection",
+        "description": "Timeless fragrances in elegant vessels"
+      },
+      {
+        "id": 2,
+        "name": "Nature's Essence",
+        "description": "Inspired by the natural world"
+      },
+      {
+        "id": 3,
+        "name": "Luxury Line",
+        "description": "Premium scents in sophisticated packaging"
+      },
+      {
+        "id": 4,
+        "name": "Seasonal Favorites",
+        "description": "Limited edition seasonal collections"
+      }
+    ],
     "products": [
-        {
-            "id": 1,
-            "name": "Lavender Bliss Candle",
-            "price": 120,
-            "description": "A relaxing scent infused with lavender oil.",
-            "imageUrl": "assets/candle1.jpg",
-            "artistId": 1,
-            "artistName": "Scented by Sara"
+      {
+        "id": 1,
+        "name": "Lavender Bliss Candle",
+        "price": 120,
+        "categoryId": 1,
+        "description": "A soothing blend of pure lavender essential oil and subtle hints of vanilla, perfect for relaxation and mindful moments.",
+        "details": {
+          "burnTime": "45-50 hours",
+          "weight": "8 oz",
+          "scentNotes": ["Lavender", "Vanilla", "Chamomile"],
+          "mood": ["Relaxing", "Calming", "Peaceful"]
         },
-        {
-            "id": 2,
-            "name": "Vanilla Wood Jar",
-            "price": 150,
-            "description": "Smooth vanilla scent in a rustic wooden jar.",
-            "imageUrl": "assets/candle2.jpg",
-            "artistId": 2,
-            "artistName": "Art by Ali"
-        }
+        "images": [
+          "/assets/images/Products/Lavender Bliss Candle.jpg",
+          "/assets/images/Products/Lavender Bliss Candle 2.jpg",
+          "/assets/images/Products/Lavender Bliss Candle 3.jpg",
+          "/assets/images/Products/Lavender Bliss Candle 4.jpg",
+          "/assets/images/Products/Lavender Bliss Candle 5.jpg",
+          "/assets/images/Products/Lavender Bliss Candle 6.jpg",
+          "/assets/images/Products/Lavender Bliss Candle 7.jpg"
+        ],
+        "artistId": 1,
+        "artistName": "Scented by Sara",
+        "inStock": true,
+        "featured": true
+      },
+      {
+        "id": 2,
+        "name": "Coconut Driftwood",
+        "price": 150,
+        "categoryId": 2,
+        "description": "Transport yourself to a tropical beach with this sophisticated blend of coconut, driftwood, and sea salt.",
+        "details": {
+          "burnTime": "50-55 hours",
+          "weight": "10 oz",
+          "scentNotes": ["Coconut", "Driftwood", "Sea Salt", "Vanilla"],
+          "mood": ["Tropical", "Relaxing", "Fresh"]
+        },
+        "images": [
+          "/assets/images/Products/Coconut Driftwood.jpg",
+          "/assets/images/Products/Coconut Driftwood 1.jpg",
+          "/assets/images/Products/Coconut Driftwood 2.jpg",
+          "/assets/images/Products/Coconut Driftwood 3.jpg",
+          "/assets/images/Products/Coconut Driftwood 4.jpg",
+          "/assets/images/Products/Coconut Driftwood 5.jpg",
+          "/assets/images/Products/Coconut Driftwood 6.jpg",
+          "/assets/images/Products/Coconut Driftwood 7.jpg",
+          "/assets/images/Products/Coconut Driftwood Package.jpg"
+        ],
+        "artistId": 2,
+        "artistName": "Art by Ali",
+        "inStock": true,
+        "featured": true
+      },
+      {
+        "id": 3,
+        "name": "Rose Garden Delight",
+        "price": 135,
+        "categoryId": 1,
+        "description": "A romantic blend of fresh garden roses and subtle hints of peony and jasmine.",
+        "details": {
+          "burnTime": "40-45 hours",
+          "weight": "8 oz",
+          "scentNotes": ["Rose", "Peony", "Jasmine", "Green Leaves"],
+          "mood": ["Romantic", "Fresh", "Elegant"]
+        },
+        "images": [
+          "/assets/images/Products/Rose Garden Delight .jpg",
+          "/assets/images/Products/Rose Garden Delight 1.jpg",
+          "/assets/images/Products/Rose Garden Delight 2.jpg",
+          "/assets/images/Products/Rose Garden Delight 3.jpg",
+          "/assets/images/Products/Rose Garden Delight 4.jpg",
+          "/assets/images/Products/Rose Garden Delight 5.jpg"
+        ],
+        "artistId": 1,
+        "artistName": "Scented by Sara",
+        "inStock": true,
+        "featured": false
+      },
+      {
+        "id": 4,
+        "name": "Citrus Sunrise",
+        "price": 110,
+        "categoryId": 2,
+        "description": "An invigorating blend of citrus fruits that brings the freshness of morning sunshine.",
+        "details": {
+          "burnTime": "35-40 hours",
+          "weight": "7 oz",
+          "scentNotes": ["Orange", "Lemon", "Grapefruit", "Bergamot"],
+          "mood": ["Energizing", "Fresh", "Uplifting"]
+        },
+        "images": [
+          "/assets/images/Products/Citrus Sunrise 1.jpg",
+          "/assets/images/Products/Citrus Sunrise 2.jpg",
+          "/assets/images/Products/Citrus Sunrise 3.jpg",
+          "/assets/images/Products/Citrus Sunrise 4.jpg"
+        ],
+        "artistId": 3,
+        "artistName": "Candles by Noor",
+        "inStock": true,
+        "featured": false
+      },
+      {
+        "id": 5,
+        "name": "Midnight Oud",
+        "price": 180,
+        "categoryId": 3,
+        "description": "A luxurious oriental blend featuring premium oud wood and amber notes.",
+        "details": {
+          "burnTime": "55-60 hours",
+          "weight": "12 oz",
+          "scentNotes": ["Oud", "Amber", "Musk", "Vanilla"],
+          "mood": ["Luxurious", "Mysterious", "Sophisticated"]
+        },
+        "images": [
+          "/assets/images/Products/Midnight Oud 1.jpg",
+          "/assets/images/Products/Midnight Oud 2.jpg",
+          "/assets/images/Products/Midnight Oud 3.jpg",
+          "/assets/images/Products/Midnight Oud 4.jpg",
+          "/assets/images/Products/Midnight Oud 5.jpg"
+        ],
+        "artistId": 2,
+        "artistName": "Art by Ali",
+        "inStock": true,
+        "featured": true
+      },
+      {
+        "id": 6,
+        "name": "Ocean Mist Glow",
+        "price": 125,
+        "categoryId": 2,
+        "description": "Capture the essence of the ocean with this fresh marine scent blend.",
+        "details": {
+          "burnTime": "45-50 hours",
+          "weight": "9 oz",
+          "scentNotes": ["Sea Salt", "Eucalyptus", "Marine Notes", "Fresh Air"],
+          "mood": ["Fresh", "Calming", "Clean"]
+        },
+        "images": [
+          "/assets/images/Products/Ocean Mist Glow.jpg",
+          "/assets/images/Products/Ocean Mist Glow 1.jpg",
+          "/assets/images/Products/Ocean Mist Glow 2.jpg",
+          "/assets/images/Products/Ocean Mist Glow 3.jpg",
+          "/assets/images/Products/Ocean Mist Glow 4.jpg",
+          "/assets/images/Products/Ocean Mist Glow background.jpg",
+          "/assets/images/Products/Ocean Mist Glow packges.jpg"
+        ],
+        "artistId": 4,
+        "artistName": "Glow by Lina",
+        "inStock": true,
+        "featured": false
+      },
+      {
+        "id": 7,
+        "name": "Spiced Pumpkin Charm",
+        "price": 140,
+        "categoryId": 4,
+        "description": "A seasonal favorite combining warm pumpkin spice with hints of vanilla and cinnamon.",
+        "details": {
+          "burnTime": "45-50 hours",
+          "weight": "9 oz",
+          "scentNotes": ["Pumpkin", "Cinnamon", "Nutmeg", "Vanilla"],
+          "mood": ["Cozy", "Warm", "Festive"]
+        },
+        "images": [
+          "/assets/images/Products/Spiced Pumpkin Charm.jpg",
+          "/assets/images/Products/Spiced Pumpkin Charm 1.jpg",
+          "/assets/images/Products/Spiced Pumpkin Charm 2.jpg",
+          "/assets/images/Products/Spiced Pumpkin Charm 3.jpg",
+          "/assets/images/Products/Spiced Pumpkin Charm 4.jpg",
+          "/assets/images/Products/Spiced Pumpkin Charm 5.jpg",
+          "/assets/images/Products/Spiced Pumpkin Charm 6.jpg"
+        ],
+        "artistId": 4,
+        "artistName": "Glow by Lina",
+        "inStock": true,
+        "featured": true,
+        "seasonal": true
+      },
+      {
+        "id": 8,
+        "name": "Forest Pine Essence",
+        "price": 145,
+        "categoryId": 2,
+        "description": "Experience the freshness of a pine forest with this invigorating blend.",
+        "details": {
+          "burnTime": "50-55 hours",
+          "weight": "10 oz",
+          "scentNotes": ["Pine", "Cedar", "Fir Balsam", "Forest Air"],
+          "mood": ["Fresh", "Invigorating", "Natural"]
+        },
+        "images": [
+          "/assets/images/Products/Forest Pine Essence.jpg",
+          "/assets/images/Products/Forest Pine Essence 1.jpg",
+          "/assets/images/Products/Forest Pine Essence 2.jpg",
+          "/assets/images/Products/Forest Pine Essence 3.jpg",
+          "/assets/images/Products/Forest Pine Essence 4.jpg",
+          "/assets/images/Products/Forest Pine Essence 5.jpg",
+          "/assets/images/Products/Forest Pine Essence 6.jpg"
+        ],
+        "artistId": 5,
+        "artistName": "Wicks & Wonders",
+        "inStock": true,
+        "featured": false
+      },
+      {
+        "id": 9,
+        "name": "Berry Patch Tin",
+        "price": 95,
+        "categoryId": 1,
+        "description": "A delightful mix of fresh berries in a charming vintage-style tin.",
+        "details": {
+          "burnTime": "30-35 hours",
+          "weight": "6 oz",
+          "scentNotes": ["Mixed Berries", "Vanilla", "Fresh Leaves"],
+          "mood": ["Sweet", "Cheerful", "Nostalgic"]
+        },
+        "images": [
+          "/assets/images/Products/Berry Patch Tin.jpg",
+          "/assets/images/Products/Berry Patch Tin 1.jpg",
+          "/assets/images/Products/Berry Patch Tin2.jpg",
+          "/assets/images/Products/Berry Patch Tin 3.jpg",
+          "/assets/images/Products/Berry Patch Tin 4.jpg"
+        ],
+        "artistId": 5,
+        "artistName": "Wicks & Wonders",
+        "inStock": true,
+        "featured": false
+      },
+      {
+        "id": 10,
+        "name": "Saffron Sunset",
+        "price": 165,
+        "categoryId": 3,
+        "description": "A luxurious blend of saffron, warm spices, and subtle floral notes.",
+        "details": {
+          "burnTime": "50-55 hours",
+          "weight": "10 oz",
+          "scentNotes": ["Saffron", "Rose", "Warm Spices", "Amber"],
+          "mood": ["Luxurious", "Exotic", "Warm"]
+        },
+        "images": [
+          "/assets/images/Products/Saffron Sunset.jpg",
+          "/assets/images/Products/Saffron Sunset 1.jpg",
+          "/assets/images/Products/Saffron Sunset 2.jpg"
+        ],
+        "artistId": 3,
+        "artistName": "Candles by Noor",
+        "inStock": true,
+        "featured": true
+      }
     ],
     "artists": [
-        {
-            "id": 1,
-            "name": "Scented by Sara",
-            "bio": "Specializes in floral-themed candles."
-        },
-        {
-            "id": 2,
-            "name": "Art by Ali",
-            "bio": "Rustic, woody scents with earthy designs."
-        }
+      {
+        "id": 1,
+        "name": "Scented by Sara",
+        "bio": "Specializing in floral and calming scents, Sara creates each candle with mindfulness and attention to detail.",
+        "expertise": ["Floral Blends", "Aromatherapy", "Natural Ingredients"],
+        "imageUrl": "/assets/images/artists/sara.jpg",
+        "featured": true
+      },
+      {
+        "id": 2,
+        "name": "Art by Ali",
+        "bio": "Ali combines traditional Middle Eastern scents with modern design for truly unique luxury pieces.",
+        "expertise": ["Luxury Scents", "Oriental Blends", "Premium Packaging"],
+        "imageUrl": "/assets/images/artists/ali.jpg",
+        "featured": true
+      },
+      {
+        "id": 3,
+        "name": "Candles by Noor",
+        "bio": "Inspired by Mediterranean mornings and exotic spices, Noor creates vibrant and energizing fragrances.",
+        "expertise": ["Citrus Blends", "Spice Combinations", "Exotic Scents"],
+        "imageUrl": "/assets/images/artists/noor.jpg",
+        "featured": true
+      },
+      {
+        "id": 4,
+        "name": "Glow by Lina",
+        "bio": "Lina specializes in seasonal collections and aromatherapy-inspired candles for wellness.",
+        "expertise": ["Seasonal Collections", "Aromatherapy", "Wellness Blends"],
+        "imageUrl": "/assets/images/artists/lina.jpg",
+        "featured": false
+      },
+      {
+        "id": 5,
+        "name": "Wicks & Wonders",
+        "bio": "Creating whimsical and nature-inspired candles with unique container designs.",
+        "expertise": ["Nature-Inspired", "Unique Containers", "Fresh Scents"],
+        "imageUrl": "/assets/images/artists/wonders.jpg",
+        "featured": false
+      }
     ],
-    "customOrders": []
-}
+    "customOrders": [
+      {
+        "id": 1,
+        "customerName": "Maya El-Sharif",
+        "email": "maya@example.com",
+        "message": "I'd like a set of 3 candles with jasmine, lavender, and vanilla. Prefer white matte jars.",
+        "preferences": {
+          "scents": ["Jasmine", "Lavender", "Vanilla"],
+          "style": "Modern",
+          "size": "Medium",
+          "quantity": 3
+        },
+        "status": "pending"
+      },
+      {
+        "id": 2,
+        "customerName": "Omar Khaled",
+        "email": "omar.khaled@example.com",
+        "message": "Looking for Ramadan-themed candles with oud and amber scents.",
+        "preferences": {
+          "scents": ["Oud", "Amber"],
+          "style": "Traditional",
+          "occasion": "Ramadan",
+          "quantity": 2
+        },
+        "status": "in_progress"
+      },
+      {
+        "id": 3,
+        "customerName": "Nour Hassan",
+        "email": "nour.h@example.com",
+        "message": "I need a bulk order (15 pieces) for wedding giveaways. White & rose scents.",
+        "status": "pending"
+      },
+      {
+        "id": 4,
+        "customerName": "Yasmin Adel",
+        "email": "yasmin.adel@example.com",
+        "message": "Can I order a custom candle for Mother's Day with a rose and vanilla blend?",
+        "status": "completed"
+      },
+      {
+        "id": 5,
+        "customerName": "Tariq Mahmoud",
+        "email": "tariq.mahmoud@example.com",
+        "message": "Looking for 5 winter-themed candles with pine and cinnamon notes.",
+        "status": "pending"
+      },
+      {
+        "id": 6,
+        "customerName": "Lina Osama",
+        "email": "lina@example.com",
+        "message": "Custom engraved candle jars with lemon-verbena scent.",
+        "status": "responded"
+      },
+      {
+        "id": 7,
+        "customerName": "Farah Nabil",
+        "email": "farah.n@example.com",
+        "message": "A gift box with 4 mini candles: coffee, vanilla, oud, and rose.",
+        "status": "pending"
+      }
+    ]
+  }
+  

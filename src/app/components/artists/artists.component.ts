@@ -4,6 +4,7 @@ import { ActivatedRoute, RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { ARTISTS } from '../../data/artists';
 import { PRODUCTS } from '../../data/products';
+import { Artist } from '../../core/interfaces/artist';
 
 @Component({
   selector: 'app-artists',
@@ -14,14 +15,13 @@ import { PRODUCTS } from '../../data/products';
 })
 export class ArtistsComponent implements OnInit {
 
-  artist: any;
-  artistProducts: any[] = [];
+  artists: Artist[] = [];
 
-  constructor(private route: ActivatedRoute) { }
+  constructor(private artistService: ArtistService) { }
 
   ngOnInit(): void {
-    const id = Number(this.route.snapshot.paramMap.get('id'));
-    this.artist = ARTISTS.find(a => a.id === id);
-    this.artistProducts = PRODUCTS.filter(p => p.artistId === id);
+    this.artistService.getAllArtists().subscribe(data => {
+      this.artists = data;
+    });
   }
 }

@@ -1,18 +1,110 @@
+@import '../../../styles.scss';
+
 .navbar {
-    background-color: transparent !important;
-    color: aliceblue;
+  backdrop-filter: blur(10px);
+  background-color: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+  min-height: 70px;
+  padding: 0.5rem 1rem;
+  z-index: 1020;
+  
+  .navbar-brand {
+    .brand-text {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8rem;
+      font-weight: 700;
+      background: linear-gradient(45deg, $sr-sage, $sr-rose);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      transition: all 0.3s ease;
+      
+      &:hover {
+        transform: scale(1.05);
+      }
+    }
+  }
+  
+  .nav-link {
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
+    margin: 0 0.2rem;
+    color: $text-dark;
+    transition: all 0.3s ease;
+    
+    i {
+      margin-right: 0.5rem;
+      font-size: 1.1rem;
+      opacity: 0.8;
+    }
+    
+    &:hover {
+      color: $sr-sage;
+      transform: translateY(-2px);
+    }
+    
+    &.active {
+      color: $sr-sage;
+      font-weight: 600;
+      
+      &:after {
+        content: '';
+        display: block;
+        width: 100%;
+        height: 2px;
+        background-color: $sr-sage;
+        margin-top: 3px;
+      }
+    }
+  }
+  
+  .navbar-toggler {
+    border: none;
+    padding: 0.5rem;
+    
+    &:focus {
+      box-shadow: none;
+      outline: none;
+    }
+  }
+  
+  @media (max-width: 991.98px) {
+    .navbar-collapse {
+      background-color: rgba(255, 255, 255, 0.98);
+      padding: 1rem;
+      border-radius: 10px;
+      margin-top: 1rem;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      
+      .navbar-nav {
+        padding: 0.5rem 0;
+      }
+    }
+    
+    .nav-link {
+      padding: 0.7rem 1rem;
+      border-radius: 8px;
+      
+      &:hover {
+        background-color: rgba($sr-sage, 0.1);
+        transform: none;
+      }
+    }
+  }
 }
 
-.nav-link {
-    font-weight: 500;
-    margin-left: 1rem;
-}
-
-.nav-link:hover {
-    color: #fcc185;
-}
-
-.nav-brand {
-    text-decoration: none;
-    font-size: 1.6rem;
+// Cart badge
+.nav-item {
+  position: relative;
+  
+  .cart-badge {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: $sr-rose;
+    color: white;
+    border-radius: 50%;
+    padding: 0.2rem 0.5rem;
+    font-size: 0.75rem;
+    transform: translate(50%, -50%);
+  }
 }

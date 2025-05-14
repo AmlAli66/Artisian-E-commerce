@@ -8,32 +8,30 @@ import { Product } from '../interfaces/product';
   providedIn: 'root'
 })
 export class ArtistService {
-  private apiUrl = 'http://localhost:3000/artists';
+  private apiUrl = 'http://localhost:3001';
 
   constructor(private http: HttpClient) { }
 
   getArtists(): Observable<Artist[]> {
-    return this.http.get<Artist[]>(this.apiUrl);
+    return this.http.get<Artist[]>(`${this.apiUrl}/artists`);
   }
 
   getArtistById(id: number): Observable<Artist> {
-    return this.http.get<Artist>(`${this.apiUrl}/${id}`);
-
+    return this.http.get<Artist>(`${this.apiUrl}/artists/${id}`);
   }
-
-
-
 
   getProductsByArtistId(artistId: number): Observable<Product[]> {
-    return this.http.get<Product[]>(`${this.apiUrl}?artistId=${artistId}`);
-
+    return this.http.get<Product[]>(`${this.apiUrl}/products?artistId=${artistId}`);
   }
+
+  getAllArtists(): Observable<Artist[]> {
+    return this.http.get<Artist[]>(`${this.apiUrl}/artists`);
+  }
+
   // استرجاع المنتجات المرتبطة بفنان معين
   // getProductsByArtistId(artistId: number) {
   //   return this.products.filter((product) => product.artistId === artistId);
   // }
-
-
 
   // private artists = [
   //   {
@@ -66,6 +64,4 @@ export class ArtistService {
   //     artistId: 2,
   //   },
   // ];
-
-
 }

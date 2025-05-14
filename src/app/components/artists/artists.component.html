@@ -1,22 +1,12 @@
-<div class="container mt-4" *ngIf="artist">
-    <div class="text-center mb-4">
-        <img [src]="artist.image" class="rounded-circle" width="120" alt="{{ artist.name }}">
-        <h2 class="mt-2">{{ artist.name }}</h2>
-        <p>{{ artist.bio }}</p>
-    </div>
-
-    <hr>
-
-    <h4 class="mb-3">Candles by {{ artist.name }}</h4>
+<div class="container my-5">
+    <h2 class="text-center mb-4 fw-bold">Meet Our Talented Artists 🎨</h2>
     <div class="row">
-        <div class="col-md-4 mb-3" *ngFor="let product of artistProducts">
-            <div class="card h-100">
-                <img [src]="product.image" class="card-img-top" alt="{{ product.name }}">
+        <div *ngFor="let artist of artists" class="col-md-4 mb-4">
+            <div class="card h-100 shadow-sm text-center">
                 <div class="card-body">
-                    <h5 class="card-title">{{ product.name }}</h5>
-                    <p class="card-text">{{ product.scent }} - {{ product.shape }}</p>
-                    <p class="card-text"><strong>{{ product.price }} EGP</strong></p>
-                    <a [routerLink]="['/product', product.id]" class="btn btn-outline-primary btn-sm">View Details</a>
+                    <h5 class="card-title">{{ artist.name }}</h5>
+                    <p class="card-text text-muted">{{ artist.bio }}</p>
+                    <a [routerLink]="['/artist', artist.id]" class="btn btn-outline-dark mt-2">View Profile</a>
                 </div>
             </div>
         </div>

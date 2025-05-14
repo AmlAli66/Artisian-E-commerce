@@ -1,143 +1,156 @@
 // Global Variables
-$primary-bg-color: #2a0606; // Dark background
-$accent-color: #f1e0d6; // Light beige accent for button
-$highlight-color: #f2b8a0; // Soft pink for hover effects
-// ////////////////////////////
-$color-matcha: #809671;
-$color-almond: #E5E0D8;
-$color-pistache: #B3B792;
-$color-chai: #D2AB80;
-$color-carob: #725C3A;
-$color-vanilla: #E5D2B8;
+$sr-sage: #8A9A5B;
+$sr-cream: #F9F6F0;
+$sr-lavender: #E6E6FA;
+$sr-rose: #D4A5A5;
+$sr-charcoal: #36454F;
+$sr-gold: #D4AF37;
 
-// Neutrals
-$color-white: #ffffff;
-$color-black: #000000;
+// Theme Colors
+$primary: $sr-sage;
+$secondary: $sr-cream;
+$accent: $sr-lavender;
+$text-dark: $sr-charcoal;
+$text-light: $sr-cream;
 
+// Typography
+$font-primary: 'Playfair Display', serif;
+$font-secondary: 'Poppins', sans-serif;
 
-//global styles
-.form-control,
-input,
-select {
-    background-color: $color-almond !important;
+// Animations
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0px); }
+}
+
+// Global Styles
+body {
+  background-color: $sr-cream;
+  font-family: $font-secondary;
+  color: $text-dark;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: $font-primary;
+}
+
+// Button Styles
+.btn {
+  border-radius: 25px;
+  padding: 12px 30px;
+  transition: all 0.3s ease;
+  
+  &-primary {
+    background-color: $sr-sage;
+    border: none;
+    color: $text-light;
+    
+    &:hover {
+      background-color: darken($sr-sage, 10%);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+  }
+  
+  &-outline-primary {
+    border: 2px solid $sr-sage;
+    color: $sr-sage;
+    
+    &:hover {
+      background-color: $sr-sage;
+      color: $text-light;
+    }
+  }
+}
+
+// Card Styles
+.card {
+  border: none;
+  border-radius: 15px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  background-color: white;
+  
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  }
+  
+  .card-title {
+    font-family: $font-primary;
+    color: $text-dark;
+  }
+}
+
+// Form Controls
+.form-control {
+  border-radius: 12px;
+  border: 1px solid rgba($sr-charcoal, 0.1);
+  padding: 12px 20px;
+  background-color: rgba($sr-cream, 0.5);
+  
+  &:focus {
+    box-shadow: 0 0 0 3px rgba($sr-sage, 0.2);
+    border-color: $sr-sage;
+  }
+}
+
+// Navigation
+.navbar {
+  background-color: transparent;
+  padding: 20px 0;
+  transition: all 0.3s ease;
+  
+  .nav-link {
+    color: $text-dark;
+    font-weight: 500;
+    position: relative;
+    
+    &:after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background-color: $sr-sage;
+      transition: width 0.3s ease;
+    }
+    
+    &:hover:after {
+      width: 100%;
+    }
+  }
 }
 
 // Hero Section
-.home-hero {
-    // background-color: $primary-bg-color;
-    // background: linear-gradient(to left, #000000, #3e2d25);
-    // background-color: $color-matcha ;
-    background: radial-gradient(125% 125% at 50% 10%,
-            rgba(128, 150, 113, 0.67) 40%,
-            rgba(229, 210, 184, 1) 100%);
-
-    // background: radial-gradient(150% 80% at 25% 75%,
-    //         rgba(247, 179, 137, 0.874) 40%,
-    //         rgb(90, 117, 75) 100%);
-    color: #725C3A;
-
-    .display-4,
-    .nav-brand {
-        font-family: 'Playfair Display', serif;
-        font-size: 3.5rem;
-        color: $color-vanilla;
-    }
-
-    .btn-light {
-        background-color: $accent-color;
-        border: none;
-        color: #333;
-        border-radius: 25px;
-        padding: 15px 25px;
-        font-size: 1.25rem;
-
-        &:hover {
-            background-color: $color-chai;
-            color: white;
-        }
-    }
-
-    .badge {
-        background-color: $color-pistache;
-        // border: none;
-        color: $color-carob;
-        font-size: 1rem;
-        padding: 8px 15px;
-        margin: 5px;
-        border-radius: 25px;
-        transition: all 0.5s;
-
-        &:hover {
-            border: 1px solid $color-almond;
-            background-color: transparent;
-        }
-    }
-
-    .card {
-        background-color: $color-vanilla;
-        color: $color-carob;
-        border: none;
-        border-radius: 15px;
-        overflow: hidden;
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-        height: 100%;
-
-        &:hover {
-            // transform: scale(1.05);
-            box-shadow: 0 8px 16px rgba(13, 68, 24, 0.3);
-        }
-
-        .card-body {
-            text-align: center;
-
-            h6 {
-                font-size: 1.2rem;
-                font-weight: bold;
-            }
-
-            .btn-outline-light {
-                color: white;
-                background-color: $color-chai;
-                border: none;
-
-                &:hover {
-                    color: $color-chai;
-                    border: 1px solid $color-chai;
-
-                    background-color: transparent;
-                }
-            }
-        }
-
-        img {
-            transition: transform 0.3s ease-in-out;
-
-            &:hover {
-                transform: scale(1.1);
-            }
-        }
-    }
+.hero-section ,.hero {
+  min-height: 80vh;
+  background: linear-gradient(45deg, rgba($sr-sage, 0.1), rgba($sr-lavender, 0.1));
+  display: flex;
+  align-items: center;
+  
+  h1 {
+    font-size: 4rem;
+    font-weight: 700;
+    color: $text-dark;
+    animation: fadeIn 1s ease-out;
+  }
 }
 
+// Animations
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
 
-// Responsive Adjustments
-// @media (max-width: 768px) {
-//     .home-hero {
-//         .display-4 {
-//             font-size: 2.5rem;
-//         }
-
-//         .btn-light {
-//             font-size: 1rem;
-//             padding: 12px 20px;
-//         }
-
-//         .badge {
-//             font-size: 0.85rem;
-//         }
-
-//         .card {
-//             margin-bottom: 20px;
-//         }
-//     }
-// }
+// Utility Classes
+.text-primary { color: $sr-sage !important; }
+.bg-primary { background-color: $sr-sage !important; }
+.text-accent { color: $sr-lavender !important; }
+.bg-accent { background-color: $sr-lavender !important; }

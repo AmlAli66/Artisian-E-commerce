@@ -1,41 +1,181 @@
-<div class="container my-5">
-    <h2 class="text-center mb-4 fw-bold">Our Handmade Products</h2>
-    <div class="row mb-4">
-        <div class="col-md-6 mx-auto">
-            <select class="form-select form-select-lg" [(ngModel)]="sortOption" (change)="onSort()">
-                <option value="priceAsc">Sort by Price: Low to High</option>
-                <option value="priceDesc">Sort by Price: High to Low</option>
-                <option value="nameAsc">Sort by Name: A-Z</option>
-                <option value="nameDesc">Sort by Name: Z-A</option>
-            </select>
+<div class="container-fluid py-5">
+    <!-- Category Navigation -->
+    <div class="category-navigation mb-4">
+        <div class="category-pill" [class.active]="activeCategory === null" (click)="setActiveCategory(null)">
+            All Products
         </div>
-    </div>
-
-    <div class="row mb-4">
-        <div class="col-md-6 mx-auto">
-            <input type="text" [(ngModel)]="searchQuery" (input)="onSearch()" class="form-control form-control-lg"
-                placeholder="Search handmade products..." />
+        <div class="category-pill" *ngFor="let category of categories" [class.active]="activeCategory === category.id"
+            (click)="setActiveCategory(category.id)">
+            {{ category.name }}
         </div>
     </div>
 
     <div class="row">
-        <div *ngFor="let product of displayedProducts" class="col-lg-4 col-md-6 mb-4">
-            <div class="card h-100 shadow-sm">
-                <img [src]="product.imageUrl" class="card-img-top" alt="{{ product.name }}">
-                <div class="card-body d-flex flex-column">
-                    <h5 class="card-title">{{ product.name }}</h5>
-                    <p class="card-text text-muted small">{{ product.artistName }}</p>
-                    <p class="card-text">{{ product.description | slice:0:100 }}...</p>
-                    <div class="mt-auto">
-                        <p class="card-text fw-bold">${{ product.price }}</p>
-                        <div class="d-flex justify-content-between ">
-                            <button (click)="addToCart(product)" class="btn btn-outline-primary w-100 mt-2">Add to
-                                Cart</button>
-                            <button class="btn btn-outline-dark" [routerLink]="['/products', product.id]">view</button>
+        <!-- Sidebar Filters -->
+        <div class="col-lg-3">
+            <div class="filter-section">
+                <h4>Refine Selection</h4>
 
+                <!-- Price Range -->
+                <div class="mb-4">
+                    <h5>Price Range</h5>
+                    <div class="price-range">
+                        <input type="range" class="form-range" [(ngModel)]="priceRange" (input)="filterProducts()"
+                            min="0" max="200" step="10">
+                        <div class="d-flex justify-content-between">
+                            <span>$0</span>
+                            <span>Up to ${{ priceRange }}</span>
                         </div>
                     </div>
                 </div>
+
+                <!-- Scent Types -->
+                <div class="mb-4">
+                    <h5>Scent Notes</h5>
+                    <div class="scent-list">
+                        <div class="form-check" *ngFor="let scent of scentTypes">
+                            <input class="form-check-input" type="checkbox" [id]="'scent-' + scent"
+                                [(ngModel)]="selectedScents[scent]" (change)="filterProducts()">
+                            <label class="form-check-label" [for]="'scent-' + scent">
+                                {{ scent }}
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Moods -->
+                <div class="mb-4">
+                    <h5>Mood</h5>
+                    <div class="mood-list">
+                        <div class="form-check" *ngFor="let mood of moods">
+                            <input class="form-check-input" type="checkbox" [id]="'mood-' + mood"
+                                [(ngModel)]="selectedMoods[mood]" (change)="filterProducts()">
+                            <label class="form-check-label" [for]="'mood-' + mood">
+                                {{ mood }}
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Product Grid -->
+        <div class="col-lg-9">
+            <!-- Search and Sort Controls -->
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <div class="d-flex gap-3 align-items-center">
+                    <div class="search-box">
+                        <input type="text" class="form-control" [(ngModel)]="searchQuery" (input)="filterProducts()"
+                            placeholder="Search products...">
+                    </div>
+                    <select class="form-select" [(ngModel)]="sortOption" (change)="onSort()">
+                        <option value="featured">Featured First</option>
+                        <option value="priceAsc">Price: Low to High</option>
+                        <option value="priceDesc">Price: High to Low</option>
+                        <option value="nameAsc">Name: A-Z</option>
+                        <option value="nameDesc">Name: Z-A</option>
+                    </select>
+                </div>
+                <button class="btn btn-outline-primary" (click)="toggleViewMode()">
+                    <i [class]="viewMode === 'grid' ? 'fas fa-list' : 'fas fa-th'"></i>
+                </button>
+            </div>
+
+            <!-- Products Display -->
+            <div [class]="viewMode === 'grid' ? 'product-grid' : 'product-list'">
+                <div *ngFor="let product of displayedProducts" class="product-card">
+                    <div class="product-image">
+                        <img [src]="product.images[0]" [alt]="product.name" class="main-image">
+                        <div class="thumbnail-row" *ngIf="product.images.length > 1">
+                            <img *ngFor="let img of product.images.slice(1, 4)" [src]="img" [alt]="product.name"
+                                class="thumbnail" (click)="switchMainImage(product, img)">
+                        </div>
+                        <div class="product-badges" *ngIf="product.featured || product.seasonal">
+                            <span class="badge bg-primary" *ngIf="product.featured">Featured</span>
+                            <span class="badge bg-accent" *ngIf="product.seasonal">Seasonal</span>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">{{ product.name }}</h3>
+                        <p class="artist-name" [routerLink]="['/artist', product.artistId]">
+                            By {{ product.artistName }}
+                        </p>
+                        <div class="scent-tags">
+                            <span class="scent-tag" *ngFor="let scent of product.details.scentNotes.slice(0, 3)">
+                                {{ scent }}
+                            </span>
+                        </div>
+                        <p class="product-description">{{ product.description }}</p>
+                        <div class="product-details">
+                            <span class="burn-time">
+                                <i class="fas fa-clock"></i> {{ product.details.burnTime }}
+                            </span>
+                            <span class="weight">
+                                <i class="fas fa-weight-hanging"></i> {{ product.details.weight }}
+                            </span>
+                        </div>
+                        <div class="price-action">
+                            <span class="price">${{ product.price }}</span>
+                            <div class="action-buttons">
+                                <button class="btn btn-outline-primary view-btn"
+                                    [routerLink]="['/products', product.id]">
+                                    View
+                                </button>
+                                <div class="cart-actions">
+                                    <button *ngIf="!isInCart(product.id)" class="btn btn-primary cart-btn"
+                                        (click)="addToCart(product)" [disabled]="!product.inStock"
+                                        [title]="product.inStock ? 'Add to Cart' : 'Out of Stock'">
+                                        <i class="fas fa-shopping-cart"></i>
+                                    </button>
+                                    <div *ngIf="isInCart(product.id)"
+                                        class="quantity-control d-flex align-items-center">
+                                        <button class="btn btn-outline-primary btn-sm"
+                                            (click)="cartService.updateQuantity(product.id, getCartItemQuantity(product.id) - 1)"
+                                            [disabled]="getCartItemQuantity(product.id) <= 1">
+                                            <i class="fas fa-minus"></i>
+                                        </button>
+                                        <span class="mx-2">{{ getCartItemQuantity(product.id) }}</span>
+                                        <button class="btn btn-outline-primary btn-sm"
+                                            (click)="cartService.updateQuantity(product.id, getCartItemQuantity(product.id) + 1)">
+                                            <i class="fas fa-plus"></i>
+                                        </button>
+                                        <button class="btn btn-danger btn-sm ms-2"
+                                            (click)="cartService.removeFromCart(product.id)">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Related Products -->
+                    <div class="related-products" *ngIf="viewMode === 'list'">
+                        <h3>Similar Products</h3>
+                        <div class="related-grid">
+                            <div class="product-card" *ngFor="let related of getRelatedProducts(product)">
+                                <div class="product-image">
+                                    <img [src]="related.images[0]" [alt]="related.name" class="main-image">
+                                </div>
+                                <div class="product-info">
+                                    <h3 class="product-title">{{ related.name }}</h3>
+                                    <p class="price">${{ related.price }}</p>
+                                    <button class="btn btn-outline-primary btn-sm"
+                                        [routerLink]="['/products', related.id]">
+                                        View
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Empty State -->
+            <div *ngIf="displayedProducts.length === 0" class="empty-state">
+                <i class="fas fa-search fa-3x"></i>
+                <h3>No products found</h3>
+                <p>Try adjusting your filters or search terms</p>
             </div>
         </div>
     </div>

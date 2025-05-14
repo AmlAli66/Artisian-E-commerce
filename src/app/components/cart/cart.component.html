@@ -1,21 +1,78 @@
-<div class="container mt-4">
-    <h3>Your Cart</h3>
-    <div *ngIf="items.length === 0">
-        <p>Your cart is empty.</p>
+<div class="cart-container">
+    <div class="cart-header">
+        <h2>Your Cart</h2>
+        <p *ngIf="cartItems.length === 0" class="empty-cart-message">
+            Your cart is empty. <a routerLink="/products">Continue shopping</a>
+        </p>
     </div>
-    <div *ngIf="items.length > 0">
-        <ul class="list-group mb-3">
-            <li class="list-group-item d-flex justify-content-between align-items-center" *ngFor="let item of items">
-                <div>
-                    {{ item.name }} (x{{ item.quantity }})
+
+    <div class="cart-items" *ngIf="cartItems.length > 0">
+        <div class="cart-item" *ngFor="let item of cartItems">
+            <div class="item-image">
+                <img [src]="item.images[0]" [alt]="item.name">
+            </div>
+            <div class="item-details">
+                <h3>{{ item.name }}</h3>
+                <p class="item-description">{{ item.description }}</p>
+
+                <!-- Custom Order Details -->
+                <div class="custom-details" *ngIf="item.customOrder">
+                    <h4>Custom Candle Details:</h4>
+                    <ul>
+                        <li><strong>Shape:</strong> {{ item.customOrder.shape | titlecase }}</li>
+                        <li><strong>Size:</strong> {{ item.customOrder.size | titlecase }}</li>
+                        <li><strong>Color:</strong>
+                            <span class="color-swatch" [style.background-color]="item.customOrder.color"></span>
+                        </li>
+                        <li><strong>Scent:</strong> {{ item.customOrder.scentPrimary | titlecase }}
+                            (Intensity: {{ item.customOrder.scentIntensity }}/5)</li>
+                        <li><strong>Container:</strong> {{ item.customOrder.container | titlecase }}</li>
+                        <li *ngIf="item.customOrder.message">
+                            <strong>Message:</strong> "{{ item.customOrder.message }}"
+                        </li>
+                    </ul>
                 </div>
-                <div>
-                    {{ item.price * item.quantity }} EGP
-                    <button class="btn btn-sm btn-danger ms-2" (click)="removeItem(item.id)">Remove</button>
+
+                <div class="item-controls">
+                    <div class="quantity-controls">
+                        <button (click)="decreaseQuantity(item)" [disabled]="item.quantity <= 1">
+                            <i class="fas fa-minus"></i>
+                        </button>
+                        <span>{{ item.quantity }}</span>
+                        <button (click)="increaseQuantity(item)">
+                            <i class="fas fa-plus"></i>
+                        </button>
+                    </div>
+                    <div class="price-info">
+                        <span class="item-price">${{ item.price }}</span>
+                        <span class="item-total">${{ item.price * item.quantity }}</span>
+                    </div>
+                    <button class="remove-btn" (click)="removeItem(item)">
+                        <i class="fas fa-trash"></i>
+                    </button>
                 </div>
-            </li>
-        </ul>
-        <h5>Total: {{ total }} EGP</h5>
-        <button class="btn btn-primary" routerLink="/checkout">Checkout</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="cart-summary" *ngIf="cartItems.length > 0">
+        <div class="summary-details">
+            <div class="summary-row">
+                <span>Subtotal</span>
+                <span>${{ calculateSubtotal() }}</span>
+            </div>
+            <div class="summary-row">
+                <span>Shipping</span>
+                <span>${{ calculateShipping() }}</span>
+            </div>
+            <div class="summary-row total">
+                <span>Total</span>
+                <span>${{ calculateTotal() }}</span>
+            </div>
+        </div>
+        <button class="checkout-btn" (click)="checkout()">
+            Proceed to Checkout
+            <i class="fas fa-arrow-right"></i>
+        </button>
     </div>
 </div>
