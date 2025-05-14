@@ -1,12 +1,12 @@
 <div class="custom-order-container">
     <!-- Progress Bar -->
     <div class="progress-bar">
-        <div class="progress-steps">
-            <div *ngFor="let step of steps; let i = index" [class.active]="currentStep >= i"
+        <div class="progress-steps" [attr.data-progress]="currentStep">
+            <div *ngFor="let step of steps; let i = index" [class.active]="currentStep === i"
                 [class.completed]="currentStep > i" [class.valid]="i < currentStep && formValid" class="step">
                 <div class="step-number">
-                    <i *ngIf="i < currentStep && formValid" class="fas fa-check"></i>
-                    <span *ngIf="!(i < currentStep && formValid)">{{ i + 1 }}</span>
+                    <i *ngIf="currentStep > i" class="fas fa-check"></i>
+                    <span *ngIf="!(currentStep > i)">{{ i + 1 }}</span>
                 </div>
                 <div class="step-label">{{ step }}</div>
             </div>
@@ -19,17 +19,14 @@
         <div class="preview-section">
             <div class="preview-container" [class.loading]="previewLoading">
                 <div class="preview-image">
-                    <img [src]="currentPreviewImage" [alt]="candleForm.get('shape')?.value + ' candle preview'"
+                    <img [src]="currentPreviewImage"
+                        [alt]="candleForm.get('type')?.value === 'direct' ? 'Shape Preview' : 'Container Preview'"
                         [@fadeAnimation]>
                     <div class="preview-overlay" *ngIf="previewLoading">
                         <div class="spinner"></div>
                     </div>
                 </div>
                 <div class="preview-controls">
-                    <button (click)="togglePreviewFlame()" class="btn-preview">
-                        <i class="fas" [class.fa-fire]="!showPreviewFlame" [class.fa-fire-alt]="showPreviewFlame"></i>
-                        {{ showPreviewFlame ? 'Extinguish' : 'Light' }} Candle
-                    </button>
                     <div class="preview-price">
                         Estimated Price: ${{ calculatePrice() }}
                     </div>
@@ -40,69 +37,105 @@
         <!-- Form Section -->
         <div class="form-section">
             <form [formGroup]="candleForm" (ngSubmit)="onSubmit()">
-                <!-- Step 1: Shape & Size -->
+                <!-- Step 1: Candle Type -->
                 <div *ngIf="currentStep === 0" class="step-content" @slideAnimation>
-                    <h3>Choose Your Candle Shape</h3>
-                    <div class="shape-options">
-                        <div *ngFor="let shape of shapes" class="shape-option"
-                            [class.selected]="isOptionSelected(shape.value, 'shape')"
-                            (click)="candleForm.patchValue({ shape: shape.value })">
-                            <i [class]="shape.icon"></i>
-                            <span>{{ shape.label }}</span>
+                    <h3>Choose Your Candle Type</h3>
+                    <div class="type-selection">
+                        <div class="type-options">
+                            <div class="type-option" [class.selected]="candleForm.get('type')?.value === 'direct'"
+                                (click)="candleForm.patchValue({type: 'direct', container: ''})">
+                                <i class="fas fa-cube"></i>
+                                <span>Direct Shape Candle</span>
+                            </div>
+                            <div class="type-option" [class.selected]="candleForm.get('type')?.value === 'container'"
+                                (click)="candleForm.patchValue({type: 'container', shape: ''})">
+                                <i class="fas fa-glass-whiskey"></i>
+                                <span>Container Candle</span>
+                            </div>
                         </div>
                     </div>
 
-                    <h3>Select Size</h3>
-                    <div class="size-options">
-                        <div *ngFor="let size of sizes" class="size-option"
-                            [class.selected]="isOptionSelected(size.value, 'size')"
-                            (click)="candleForm.patchValue({ size: size.value })">
-                            <i [class]="size.icon"></i>
-                            <div class="size-details">
-                                <span class="size-label">{{ size.label }}</span>
-                                <span class="size-volume">{{ size.volume }}</span>
-                                <span class="size-price">${{ size.price }}</span>
+                    <div class="image-selection" *ngIf="candleForm.get('type')?.value">
+                        <h4>Select {{ candleForm.get('type')?.value === 'direct' ? 'Shape' : 'Container' }}</h4>
+                        <div id="imageCarousel" class="carousel slide" data-bs-ride="carousel">
+                            <div class="carousel-inner">
+                                <div class="carousel-item" *ngFor="let group of getImageGroups(); let i = index"
+                                    [class.active]="i === 0">
+                                    <div class="carousel-grid">
+                                        <div *ngFor="let item of group" class="carousel-grid-item"
+                                            [class.selected]="isOptionSelected(item.value, candleForm.get('type')?.value === 'direct' ? 'shape' : 'container')"
+                                            (click)="candleForm.patchValue(candleForm.get('type')?.value === 'direct' ? {shape: item.value} : {container: item.value})">
+                                            <div class="item-image">
+                                                <img [src]="item.path" [alt]="item.label"
+                                                    (error)="handleImageError($event)" loading="lazy">
+                                                <div class="image-overlay">
+                                                    <div class="check-icon"
+                                                        *ngIf="isOptionSelected(item.value, candleForm.get('type')?.value === 'direct' ? 'shape' : 'container')">
+                                                        <i class="fas fa-check-circle"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="item-label">
+                                                <div class="label-text">{{ item.label }}</div>
+                                                <div class="price" *ngIf="item.price">+${{ item.price }}</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
+                            <button class="carousel-control-prev" type="button" data-bs-target="#imageCarousel"
+                                data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Previous</span>
+                            </button>
+                            <button class="carousel-control-next" type="button" data-bs-target="#imageCarousel"
+                                data-bs-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Next</span>
+                            </button>
                         </div>
                     </div>
                 </div>
 
-                <!-- Step 2: Color & Container -->
+                <!-- Step 2: Color & Size -->
                 <div *ngIf="currentStep === 1" class="step-content" @slideAnimation>
-                    <h3>Choose Your Color</h3>
-                    <div class="color-picker">
-                        <div *ngFor="let color of colors" class="color-swatch" [style.background-color]="color.value"
-                            [class.selected]="isOptionSelected(color.value, 'color')"
-                            (click)="candleForm.patchValue({ color: color.value })">
-                            <i class="fas fa-check" *ngIf="isOptionSelected(color.value, 'color')"></i>
-                            <span class="color-label">{{ color.label }}</span>
+                    <div class="color-selection">
+                        <h3>Choose Your Color</h3>
+                        <div class="color-options">
+                            <div *ngFor="let color of colors" class="color-option" [style.backgroundColor]="color.value"
+                                [class.selected]="candleForm.get('color')?.value === color.value"
+                                (click)="candleForm.patchValue({color: color.value})">
+                                <span class="color-label">{{ color.label }}</span>
+                            </div>
                         </div>
                     </div>
 
-                    <h3>Select Container Style</h3>
-                    <div class="container-options">
-                        <div *ngFor="let container of containers" class="container-option"
-                            [class.selected]="isOptionSelected(container.value, 'container')"
-                            (click)="candleForm.patchValue({ container: container.value })">
-                            <img [src]="container.image" [alt]="container.label">
-                            <div class="container-details">
-                                <span class="container-label">{{ container.label }}</span>
-                                <span class="container-price" *ngIf="container.price > 0">+${{ container.price }}</span>
+                    <div class="size-selection">
+                        <h3>Select Size</h3>
+                        <div class="size-options">
+                            <div *ngFor="let size of sizes" class="size-option"
+                                [class.selected]="candleForm.get('size')?.value === size.value"
+                                (click)="candleForm.patchValue({size: size.value})">
+                                <div class="size-details">
+                                    <span class="size-label">{{ size.label }}</span>
+                                    <span class="size-volume">{{ size.volume }}</span>
+                                    <span class="size-price">${{ size.price }}</span>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Step 3: Scent Selection -->
+                <!-- Step 3: Scent Profile -->
                 <div *ngIf="currentStep === 2" class="step-content" @slideAnimation>
                     <h3>Create Your Scent Profile</h3>
                     <div class="scent-selection">
-                        <div class="primary-scent">
-                            <h4>Primary Scent</h4>
-                            <div class="scent-options">
+                        <div class="scent-options">
+                            <h4>Choose Your Scent</h4>
+                            <div class="scent-grid">
                                 <div *ngFor="let scent of scents" class="scent-option"
-                                    [class.selected]="isOptionSelected(scent.value, 'scentPrimary')"
-                                    (click)="candleForm.patchValue({ scentPrimary: scent.value })">
+                                    [class.selected]="candleForm.get('scentPrimary')?.value === scent.value"
+                                    (click)="candleForm.patchValue({scentPrimary: scent.value})">
                                     <i [class]="scent.icon"></i>
                                     <span>{{ scent.label }}</span>
                                 </div>
@@ -110,7 +143,7 @@
                         </div>
 
                         <div class="scent-intensity">
-                            <h4>Scent Intensity</h4>
+                            <h4>Adjust Scent Intensity</h4>
                             <div class="intensity-slider">
                                 <input type="range" min="1" max="5" formControlName="scentIntensity"
                                     class="custom-range">
@@ -132,7 +165,7 @@
                     <h3>Add Your Personal Touch</h3>
                     <div class="personalization-options">
                         <div class="message-input">
-                            <label>Custom Message or Label</label>
+                            <label>Custom Message</label>
                             <input type="text" formControlName="message" placeholder="Enter your message (optional)"
                                 maxlength="50">
                             <div class="input-feedback">
@@ -141,14 +174,14 @@
                             </div>
                         </div>
 
-                        <div class="label-style" *ngIf="candleForm.get('message')?.value">
-                            <label>Label Style</label>
-                            <div class="label-options">
-                                <div *ngFor="let style of labelStyles" class="label-style-option"
-                                    [class.selected]="isOptionSelected(style.value, 'label')"
-                                    (click)="candleForm.patchValue({ label: style.value })">
-                                    <i [class]="style.icon"></i>
-                                    <span>{{ style.label }}</span>
+                        <div class="font-selection" *ngIf="candleForm.get('message')?.value">
+                            <h4>Choose Font Style</h4>
+                            <div class="font-options">
+                                <div *ngFor="let font of fonts" class="font-option"
+                                    [class.selected]="candleForm.get('font')?.value === font.value" [class]="font.class"
+                                    (click)="candleForm.patchValue({font: font.value})">
+                                    <span>{{ font.label }}</span>
+                                    <div class="font-preview">{{ candleForm.get('message')?.value }}</div>
                                 </div>
                             </div>
                         </div>

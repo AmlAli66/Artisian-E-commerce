@@ -1,15 +1,30 @@
 <div class="cart-container">
+    <!-- Error Message -->
+    <div *ngIf="error | async as errorMessage" class="error-message">
+        <i class="fas fa-exclamation-circle"></i>
+        {{ errorMessage }}
+        <button class="close-error" (click)="clearError()">
+            <i class="fas fa-times"></i>
+        </button>
+    </div>
+
     <div class="cart-header">
         <h2>Your Cart</h2>
-        <p *ngIf="cartItems.length === 0" class="empty-cart-message">
+        <p *ngIf="!(loading | async) && cartItems.length === 0" class="empty-cart-message">
             Your cart is empty. <a routerLink="/products">Continue shopping</a>
         </p>
     </div>
 
-    <div class="cart-items" *ngIf="cartItems.length > 0">
+    <!-- Loading Spinner -->
+    <div *ngIf="loading | async" class="loading-spinner">
+        <div class="spinner"></div>
+        <p>Loading your cart...</p>
+    </div>
+
+    <div class="cart-items" *ngIf="!(loading | async) && cartItems.length > 0">
         <div class="cart-item" *ngFor="let item of cartItems">
             <div class="item-image">
-                <img [src]="item.images[0]" [alt]="item.name">
+                <img [src]="getItemImage(item)" [alt]="item.name" loading="lazy">
             </div>
             <div class="item-details">
                 <h3>{{ item.name }}</h3>
@@ -17,18 +32,27 @@
 
                 <!-- Custom Order Details -->
                 <div class="custom-details" *ngIf="item.customOrder">
-                    <h4>Custom Candle Details:</h4>
+                    <h4>Custom {{ item.customOrder.type === 'direct' ? 'Shape' : 'Container' }} Candle Details:</h4>
                     <ul>
-                        <li><strong>Shape:</strong> {{ item.customOrder.shape | titlecase }}</li>
+                        <li *ngIf="item.customOrder.type === 'direct'">
+                            <strong>Shape:</strong> {{ item.customOrder.shape | titlecase }}
+                        </li>
+                        <li *ngIf="item.customOrder.type === 'container'">
+                            <strong>Container:</strong> {{ item.customOrder.container | titlecase }}
+                        </li>
                         <li><strong>Size:</strong> {{ item.customOrder.size | titlecase }}</li>
-                        <li><strong>Color:</strong>
+                        <li>
+                            <strong>Color:</strong>
                             <span class="color-swatch" [style.background-color]="item.customOrder.color"></span>
+                            {{ item.customOrder.color }}
                         </li>
                         <li><strong>Scent:</strong> {{ item.customOrder.scentPrimary | titlecase }}
                             (Intensity: {{ item.customOrder.scentIntensity }}/5)</li>
-                        <li><strong>Container:</strong> {{ item.customOrder.container | titlecase }}</li>
                         <li *ngIf="item.customOrder.message">
-                            <strong>Message:</strong> "{{ item.customOrder.message }}"
+                            <strong>Message:</strong>
+                            <span [style.fontFamily]="item.customOrder.font || 'inherit'">"{{ item.customOrder.message
+                                }}"</span>
+                            <span *ngIf="item.customOrder.font">({{ item.customOrder.font }})</span>
                         </li>
                     </ul>
                 </div>
@@ -44,8 +68,8 @@
                         </button>
                     </div>
                     <div class="price-info">
-                        <span class="item-price">${{ item.price }}</span>
-                        <span class="item-total">${{ item.price * item.quantity }}</span>
+                        <span class="item-price">${{ formatPrice(item.price) }}</span>
+                        <span class="item-total">${{ formatPrice(item.price * item.quantity) }}</span>
                     </div>
                     <button class="remove-btn" (click)="removeItem(item)">
                         <i class="fas fa-trash"></i>
@@ -55,22 +79,26 @@
         </div>
     </div>
 
-    <div class="cart-summary" *ngIf="cartItems.length > 0">
+    <div class="cart-summary" *ngIf="!(loading | async) && cartItems.length > 0">
         <div class="summary-details">
             <div class="summary-row">
                 <span>Subtotal</span>
-                <span>${{ calculateSubtotal() }}</span>
+                <span>${{ formatPrice(calculateSubtotal()) }}</span>
             </div>
             <div class="summary-row">
                 <span>Shipping</span>
-                <span>${{ calculateShipping() }}</span>
+                <span>${{ formatPrice(calculateShipping()) }}</span>
+            </div>
+            <div class="summary-row">
+                <span>Tax ({{ TAX_RATE * 100 }}%)</span>
+                <span>${{ formatPrice(calculateTax()) }}</span>
             </div>
             <div class="summary-row total">
                 <span>Total</span>
-                <span>${{ calculateTotal() }}</span>
+                <span>${{ formatPrice(calculateTotal()) }}</span>
             </div>
         </div>
-        <button class="checkout-btn" (click)="checkout()">
+        <button class="checkout-btn" (click)="checkout()" [disabled]="cartItems.length === 0">
             Proceed to Checkout
             <i class="fas fa-arrow-right"></i>
         </button>
