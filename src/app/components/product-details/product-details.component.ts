@@ -452,17 +452,23 @@ export class ProductDetailsComponent implements OnInit {
   }
 
   addToCart(): void {
-    if (this.product) {
+    if (this.product && this.product.inStock) {
       const cartItem = {
         id: this.product.id,
         name: this.product.name,
         price: this.product.price,
         description: this.product.description,
         images: this.product.images,
-        quantity: 1
+        quantity: this.quantity
       };
-      this.cartService.addToCart(cartItem);
-      // Show success message or handle UI feedback
+      
+      try {
+        this.cartService.addToCart(cartItem);
+        this.showToast(`${this.product.name} added to cart successfully!`, 'success');
+      } catch (error) {
+        this.showToast('Failed to add item to cart. Please try again.', 'error');
+        console.error('Error adding to cart:', error);
+      }
     }
   }
 

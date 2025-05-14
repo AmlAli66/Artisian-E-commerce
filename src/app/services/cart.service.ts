@@ -3,7 +3,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 export interface CartItem {
-  id: string | number;
+  id: number | string;
   name: string;
   price: number;
   description: string;
@@ -27,9 +27,9 @@ export interface CartItem {
   providedIn: 'root'
 })
 export class CartService {
+  private readonly STORAGE_KEY = 'artisan_cart';
+  private readonly MAX_QUANTITY = 99;
   private cartItems = new BehaviorSubject<CartItem[]>([]);
-  private readonly CART_STORAGE_KEY = 'artisan_marketplace_cart';
-  private readonly MAX_QUANTITY = 10; // Maximum quantity per item
 
   constructor() {
     this.loadCart();
@@ -37,105 +37,90 @@ export class CartService {
 
   private loadCart(): void {
     try {
-      const savedCart = localStorage.getItem(this.CART_STORAGE_KEY);
+      const savedCart = localStorage.getItem(this.STORAGE_KEY);
       if (savedCart) {
-        const parsedCart = JSON.parse(savedCart);
-        // Validate cart data
-        if (Array.isArray(parsedCart) && this.validateCartItems(parsedCart)) {
-          this.cartItems.next(parsedCart);
-        } else {
-          console.warn('Invalid cart data found in localStorage. Starting with empty cart.');
-          this.clearCart();
-        }
+        this.cartItems.next(JSON.parse(savedCart));
       }
     } catch (error) {
-      console.error('Error loading cart:', error);
-      this.clearCart();
+      console.error('Error loading cart from storage:', error);
+      this.cartItems.next([]);
     }
   }
 
-  private validateCartItems(items: any[]): boolean {
-    return items.every(item => 
-      item.id && 
-      item.name && 
-      typeof item.price === 'number' && 
-      typeof item.quantity === 'number' &&
-      Array.isArray(item.images)
-    );
+  private saveCart(): void {
+    try {
+      localStorage.setItem(this.STORAGE_KEY, JSON.stringify(this.cartItems.value));
+    } catch (error) {
+      console.error('Error saving cart to storage:', error);
+    }
   }
 
   getCartItems(): Observable<CartItem[]> {
     return this.cartItems.asObservable();
   }
 
-  getCartItemCount(): Observable<number> {
-    return this.cartItems.pipe(
-      map(items => items.reduce((total, item) => total + item.quantity, 0))
-    );
-  }
-
-  getCartTotal(): Observable<number> {
-    return this.cartItems.pipe(
-      map(items => items.reduce((total, item) => total + (item.price * item.quantity), 0))
-    );
+  getCurrentCart(): CartItem[] {
+    return this.cartItems.value;
   }
 
   addToCart(item: Partial<CartItem>): void {
-    try {
-      if (!item.id || !item.name || !item.price) {
-        throw new Error('Invalid item data');
-      }
+    if (!this.validateItem(item)) {
+      throw new Error('Invalid item data');
+    }
 
+    try {
       const currentItems = this.cartItems.value;
       const existingItem = currentItems.find(i => i.id === item.id);
 
       if (existingItem) {
-        const newQuantity = (existingItem.quantity + (item.quantity || 1));
+        const newQuantity = existingItem.quantity + (item.quantity || 1);
         if (newQuantity <= this.MAX_QUANTITY) {
           existingItem.quantity = newQuantity;
           this.cartItems.next([...currentItems]);
         } else {
-          console.warn(`Cannot add more than ${this.MAX_QUANTITY} items of the same product`);
+          throw new Error(`Cannot add more than ${this.MAX_QUANTITY} items of the same product`);
         }
       } else {
         const newItem: CartItem = {
-          ...item,
-          quantity: Math.min(item.quantity || 1, this.MAX_QUANTITY),
+          id: item.id!,
+          name: item.name!,
+          price: item.price!,
           description: item.description || '',
-          images: item.images || []
-        } as CartItem;
+          images: item.images || [],
+          quantity: Math.min(item.quantity || 1, this.MAX_QUANTITY),
+          customOrder: item.customOrder
+        };
         this.cartItems.next([...currentItems, newItem]);
       }
 
       this.saveCart();
     } catch (error) {
       console.error('Error adding item to cart:', error);
+      throw error;
     }
   }
 
-  updateQuantity(itemId: string | number, quantity: number): void {
+  updateQuantity(itemId: number | string, quantity: number): void {
+    if (quantity < 1 || quantity > this.MAX_QUANTITY) {
+      throw new Error(`Quantity must be between 1 and ${this.MAX_QUANTITY}`);
+    }
+
     try {
-      if (quantity < 1 || quantity > this.MAX_QUANTITY) {
-        throw new Error(`Quantity must be between 1 and ${this.MAX_QUANTITY}`);
-      }
-
       const currentItems = this.cartItems.value;
-      const itemIndex = currentItems.findIndex(item => item.id === itemId);
-
-      if (itemIndex === -1) {
-        throw new Error('Item not found in cart');
+      const item = currentItems.find(i => i.id === itemId);
+      
+      if (item) {
+        item.quantity = quantity;
+        this.cartItems.next([...currentItems]);
+        this.saveCart();
       }
-
-      const updatedItems = [...currentItems];
-      updatedItems[itemIndex] = { ...updatedItems[itemIndex], quantity };
-      this.cartItems.next(updatedItems);
-      this.saveCart();
     } catch (error) {
       console.error('Error updating quantity:', error);
+      throw error;
     }
   }
 
-  removeFromCart(itemId: string | number): void {
+  removeFromCart(itemId: number | string): void {
     try {
       const currentItems = this.cartItems.value;
       const updatedItems = currentItems.filter(item => item.id !== itemId);
@@ -143,28 +128,36 @@ export class CartService {
       this.saveCart();
     } catch (error) {
       console.error('Error removing item from cart:', error);
+      throw error;
     }
   }
 
   clearCart(): void {
-    this.cartItems.next([]);
-    this.saveCart();
-  }
-
-  isItemInCart(itemId: string | number): boolean {
-    return this.cartItems.value.some(item => item.id === itemId);
-  }
-
-  getItemQuantity(itemId: string | number): number {
-    const item = this.cartItems.value.find(item => item.id === itemId);
-    return item ? item.quantity : 0;
-  }
-
-  private saveCart(): void {
     try {
-      localStorage.setItem(this.CART_STORAGE_KEY, JSON.stringify(this.cartItems.value));
+      this.cartItems.next([]);
+      this.saveCart();
     } catch (error) {
-      console.error('Error saving cart:', error);
+      console.error('Error clearing cart:', error);
+      throw error;
     }
+  }
+
+  getCartTotal(): number {
+    return this.cartItems.value.reduce((total, item) => {
+      return total + (item.price * item.quantity);
+    }, 0);
+  }
+
+  getItemCount(): number {
+    return this.cartItems.value.reduce((count, item) => count + item.quantity, 0);
+  }
+
+  private validateItem(item: Partial<CartItem>): boolean {
+    return !!(
+      item.id !== undefined && 
+      item.name && 
+      typeof item.price === 'number' && 
+      item.price >= 0
+    );
   }
 } 
