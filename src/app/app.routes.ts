@@ -12,49 +12,58 @@ import { CustomOrderWizardComponent } from './components/custom-order/custom-ord
 export const routes: Routes = [
     {
         path: '',
-        redirectTo: '/products',
+        redirectTo: '/home',
         pathMatch: 'full'
     },
     {
         path: 'home',
-        component: HomeComponent
+        component: HomeComponent,
+        data: { animation: 'HomePage' }
     },
     {
         path: 'products',
         loadComponent: () => 
-            import('./components/product-list/product-list.component').then(m => m.ProductListComponent)
+            import('./components/product-list/product-list.component').then(m => m.ProductListComponent),
+        data: { animation: 'ProductsPage' }
     },
     {
         path: 'cart',
         loadComponent: () => 
-            import('./components/cart/cart.component').then(m => m.CartComponent)
+            import('./components/cart/cart.component').then(m => m.CartComponent),
+        data: { animation: 'CartPage' }
     },
     {
         path: 'products/:id',
         loadComponent: () => 
-            import('./components/product-details/product-details.component').then(m => m.ProductDetailsComponent)
+            import('./components/product-details/product-details.component').then(m => m.ProductDetailsComponent),
+        data: { animation: 'ProductDetailsPage' }
     },
     {
         path: 'checkout',
         loadComponent: () => 
-            import('./components/checkout/checkout.component').then(m => m.CheckoutComponent)
+            import('./components/checkout/checkout.component').then(m => m.CheckoutComponent),
+        data: { animation: 'CheckoutPage' }
     },
     {
         path: 'order-success',
         loadComponent: () => 
-            import('./components/order-success/order-success.component').then(m => m.OrderSuccessComponent)
+            import('./components/order-success/order-success.component').then(m => m.OrderSuccessComponent),
+        data: { animation: 'OrderSuccessPage' }
     },
     {
         path: 'artists',
-        component: ArtistsComponent
+        component: ArtistsComponent,
+        data: { animation: 'ArtistsPage' }
     },
     {
         path: 'artist/:id',
         loadComponent: () => 
-            import('./components/artist-profile/artist-profile.component').then(m => m.ArtistProfileComponent)
+            import('./components/artist-profile/artist-profile.component').then(m => m.ArtistProfileComponent),
+        data: { animation: 'ArtistProfilePage' }
     },
     {
         path: 'custom-order',
-        component: CustomOrderWizardComponent
+        component: CustomOrderWizardComponent,
+        data: { animation: 'CustomOrderPage' }
     }
 ];

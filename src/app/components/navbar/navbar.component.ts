@@ -13,20 +13,20 @@ import { Subscription } from 'rxjs';
       <div class="container">
         <!-- Brand -->
         <a class="navbar-brand" routerLink="/">
-          <i class="fas fa-fire-alt me-2"></i>
+          <i class="fas fa-burn me-2"></i>
           Scented Reverie
         </a>
 
         <!-- Mobile Cart Icon -->
         <div class="mobile-cart d-lg-none">
           <a class="cart-link" routerLink="/cart">
-            <i class="fas fa-shopping-cart"></i>
+            <i class="fas fa-shopping-bag"></i>
             <span class="cart-count" *ngIf="cartItemsCount > 0">{{ cartItemsCount }}</span>
           </a>
         </div>
 
-        <!-- Toggle Button -->
-        <button class="navbar-toggler" type="button" 
+        <!-- Toggle Button (visible only on smaller screens) -->
+        <button class="navbar-toggler d-lg-none" type="button" 
                 (click)="isMenuOpen = !isMenuOpen"
                 [attr.aria-expanded]="isMenuOpen">
           <i class="fas" [class.fa-times]="isMenuOpen" [class.fa-bars]="!isMenuOpen"></i>
@@ -37,26 +37,34 @@ import { Subscription } from 'rxjs';
           <ul class="navbar-nav mx-auto">
             <li class="nav-item">
               <a class="nav-link" routerLink="/home" routerLinkActive="active" 
-                 (click)="closeMenu()">Home</a>
+                 (click)="closeMenu()">
+                 <i class="fas fa-home me-1"></i>Home
+              </a>
             </li>
             <li class="nav-item">
               <a class="nav-link" routerLink="/products" routerLinkActive="active"
-                 (click)="closeMenu()">Products</a>
+                 (click)="closeMenu()">
+                 <i class="fas fa-shop me-1"></i>Products
+              </a>
             </li>
             <li class="nav-item">
               <a class="nav-link" routerLink="/artists" routerLinkActive="active"
-                 (click)="closeMenu()">Artists</a>
+                 (click)="closeMenu()">
+                 <i class="fas fa-palette me-1"></i>Artists
+              </a>
             </li>
             <li class="nav-item">
               <a class="nav-link" routerLink="/custom-order" routerLinkActive="active"
-                 (click)="closeMenu()">Custom Order</a>
+                 (click)="closeMenu()">
+                 <i class="fas fa-wand-magic-sparkles me-1"></i>Custom Order
+              </a>
             </li>
           </ul>
 
           <!-- Desktop Cart -->
           <div class="nav-cart d-none d-lg-block">
             <a class="cart-link" routerLink="/cart">
-              <i class="fas fa-shopping-cart"></i>
+              <i class="fas fa-shopping-bag"></i>
               <span class="cart-count" *ngIf="cartItemsCount > 0">{{ cartItemsCount }}</span>
             </a>
           </div>
@@ -66,91 +74,47 @@ import { Subscription } from 'rxjs';
   `,
   styles: [`
     .navbar {
-      background-color: rgba(255, 255, 255, 0.95);
-      backdrop-filter: blur(10px);
-      transition: all 0.3s ease;
-      padding: 1rem 0;
-      // position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
+      transition: all 0.4s ease;
+      padding: 1.5rem 0;
+      width: 100%;
       z-index: 1000;
-    }
-
-    .navbar.scrolled {
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-      background-color: rgba(255, 255, 255, 0.98);
     }
 
     .navbar-brand {
       font-family: 'Playfair Display', serif;
-      font-size: 1.5rem;
-      color: #8A9A5B;
-      transition: color 0.3s ease;
+      font-size: 1.7rem;
+      background: linear-gradient(135deg, #E9B7B7, #A8B79E);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      color: transparent;
+      font-weight: 700;
+      transition: transform 0.3s ease;
 
       &:hover {
-        color: darken(#8A9A5B, 10%);
+        transform: scale(1.05);
       }
 
       i {
-        color: #D4AF37;
-      }
-    }
-
-    .navbar-toggler {
-      border: none;
-      padding: 0.5rem;
-      color: #36454F;
-      
-      &:focus {
-        box-shadow: none;
-        outline: none;
-      }
-
-      i {
-        font-size: 1.5rem;
-        transition: all 0.3s ease;
-      }
-    }
-
-    .nav-link {
-      color: #36454F;
-      font-weight: 500;
-      padding: 0.5rem 1rem;
-      position: relative;
-      transition: all 0.3s ease;
-
-      &:after {
-        content: '';
-        position: absolute;
-        bottom: 0;
-        left: 1rem;
-        right: 1rem;
-        height: 2px;
-        background-color: #8A9A5B;
-        transform: scaleX(0);
-        transition: transform 0.3s ease;
-      }
-
-      &:hover, &.active {
-        color: #8A9A5B;
-
-        &:after {
-          transform: scaleX(1);
-        }
+        background: linear-gradient(135deg, #E9B7B7, #A8B79E);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        color: transparent;
       }
     }
 
     .cart-link {
       position: relative;
-      color: #36454F;
+      color: #8C6B5C;
       font-size: 1.2rem;
       padding: 0.5rem;
       text-decoration: none;
-      transition: color 0.3s ease;
+      transition: all 0.3s ease;
 
       &:hover {
-        color: #8A9A5B;
+        color: #E9B7B7;
+        transform: translateY(-2px);
       }
     }
 
@@ -158,13 +122,17 @@ import { Subscription } from 'rxjs';
       position: absolute;
       top: 0;
       right: 0;
-      background-color: #8A9A5B;
+      background: linear-gradient(135deg, #E9B7B7, #A8B79E);
       color: white;
       font-size: 0.75rem;
       font-weight: 600;
-      padding: 0.25rem 0.5rem;
-      border-radius: 1rem;
-      transform: translate(50%, -50%);
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transform: translate(50%, -30%);
     }
 
     .mobile-cart {
@@ -173,11 +141,13 @@ import { Subscription } from 'rxjs';
 
     @media (max-width: 991px) {
       .navbar-collapse {
-        background: white;
-        padding: 1rem;
-        border-radius: 0 0 1rem 1rem;
+        background: rgba(255, 255, 255, 0.9);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        padding: 1.5rem;
+        border-radius: 0 0 20px 20px;
         margin-top: 0.5rem;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.08);
         position: absolute;
         top: 100%;
         left: 0;
@@ -201,7 +171,8 @@ import { Subscription } from 'rxjs';
         }
 
         .nav-link {
-          display: inline-block;
+          display: inline-flex;
+          justify-content: center;
           
           &:after {
             left: 25%;

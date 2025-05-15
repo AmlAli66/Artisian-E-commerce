@@ -1,10 +1,26 @@
+// Import floral palette variables
+@import '../../../styles.scss';
+
+// Variables
+$floral-pink: #E9B7B7;
+$soft-rose: #F7D1D1; 
+$blush: #FAE5E5;
+$cream: #FFF5F0;
+$sage-green: #A8B79E;
+$forest-green: #768461;
+$warm-beige: #F2E8DA;
+$soft-brown: #8C6B5C;
+
 .custom-order-container {
   max-width: 1200px;
   margin: 2rem auto;
   padding: 2rem;
-  background: white;
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
   border-radius: 20px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.05);
 }
 
 .progress-bar {
@@ -24,7 +40,7 @@
       left: 0;
       right: 0;
       height: 3px;
-      background: #e0e0e0;
+      background: rgba($floral-pink, 0.2);
       z-index: 1;
     }
 
@@ -34,7 +50,7 @@
       top: 24px;
       left: 0;
       height: 3px;
-      background: linear-gradient(90deg, #8A9A5B, #4CAF50);
+      background: linear-gradient(90deg, $floral-pink, $sage-green);
       transition: width 0.5s ease;
       z-index: 1;
     }
@@ -58,13 +74,13 @@
         height: 50px;
         border-radius: 50%;
         background: white;
-        border: 3px solid #e0e0e0;
+        border: 3px solid rgba($floral-pink, 0.3);
         display: flex;
         align-items: center;
         justify-content: center;
         font-weight: 600;
         font-size: 1.1rem;
-        color: #666;
+        color: $soft-brown;
         transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         position: relative;
         box-shadow: 0 2px 5px rgba(0,0,0,0.1);
@@ -90,7 +106,7 @@
 
       .step-label {
         font-weight: 500;
-        color: #666;
+        color: $soft-brown;
         font-size: 0.95rem;
         transition: all 0.3s ease;
         text-align: center;
@@ -99,20 +115,20 @@
       
       &.active {
         .step-number {
-          border-color: #8A9A5B;
-          background: #8A9A5B;
+          border-color: $floral-pink;
+          background: $floral-pink;
           color: white;
           transform: scale(1.1);
-          box-shadow: 0 3px 8px rgba(138, 154, 91, 0.3);
+          box-shadow: 0 3px 8px rgba($floral-pink, 0.3);
 
           &:before {
-            border-color: rgba(138, 154, 91, 0.3);
+            border-color: rgba($floral-pink, 0.3);
             animation: pulse 2s infinite;
           }
         }
 
         .step-label {
-          color: #8A9A5B;
+          color: $floral-pink;
           font-weight: 600;
           opacity: 1;
           transform: translateY(2px);
@@ -121,10 +137,10 @@
       
       &.completed {
         .step-number {
-          background: #4CAF50;
-          border-color: #4CAF50;
+          background: $sage-green;
+          border-color: $sage-green;
           color: transparent;
-          box-shadow: 0 3px 8px rgba(76, 175, 80, 0.3);
+          box-shadow: 0 3px 8px rgba($sage-green, 0.3);
 
           i {
             opacity: 1;
@@ -133,7 +149,7 @@
         }
 
         .step-label {
-          color: #4CAF50;
+          color: $sage-green;
           opacity: 1;
         }
 
@@ -146,18 +162,18 @@
 
       &.valid:not(.active):not(.completed) {
         .step-number {
-          border-color: #8A9A5B;
-          color: #8A9A5B;
+          border-color: $sage-green;
+          color: $sage-green;
         }
 
         .step-label {
-          color: #8A9A5B;
+          color: $sage-green;
         }
       }
 
       &:hover:not(.active):not(.completed) {
         .step-number {
-          border-color: #8A9A5B;
+          border-color: $floral-pink;
           transform: scale(1.05);
         }
 
@@ -386,7 +402,7 @@
   .container-details {
     padding: 1rem;
     background: white;
-    border: 1px solid #e0e0e0;
+    border: 1px solid rgba($floral-pink, 0.2);
     border-top: none;
     border-radius: 0 0 10px 10px;
     text-align: center;
@@ -395,20 +411,21 @@
       display: block;
       font-weight: 600;
       margin-bottom: 0.25rem;
+      color: $soft-brown;
     }
 
     .container-price {
-      color: #8A9A5B;
+      color: $floral-pink;
       font-size: 0.9rem;
     }
   }
 
   &.selected {
-    box-shadow: 0 4px 12px rgba(138, 154, 91, 0.2);
+    box-shadow: 0 4px 12px rgba($floral-pink, 0.2);
     transform: translateY(-2px);
 
     .container-details {
-      border-color: #8A9A5B;
+      border-color: $floral-pink;
     }
   }
 }
@@ -429,14 +446,14 @@
       margin: 1rem 0;
       -webkit-appearance: none;
       height: 8px;
-      background: #e0e0e0;
+      background: rgba($floral-pink, 0.2);
       border-radius: 4px;
       
       &::-webkit-slider-thumb {
         -webkit-appearance: none;
         width: 24px;
         height: 24px;
-        background: #8A9A5B;
+        background: $floral-pink;
         border-radius: 50%;
         cursor: pointer;
         transition: all 0.3s ease;
@@ -450,7 +467,7 @@
     .intensity-labels {
       display: flex;
       justify-content: space-between;
-      color: #666;
+      color: rgba($soft-brown, 0.7);
       margin-top: 0.5rem;
     }
 
@@ -458,7 +475,7 @@
       text-align: center;
       margin-top: 1rem;
       font-weight: 600;
-      color: #8A9A5B;
+      color: $floral-pink;
     }
   }
 }
@@ -470,25 +487,25 @@
     label {
       display: block;
       margin-bottom: 0.5rem;
-      color: #36454F;
+      color: $soft-brown;
     }
     
     input {
       width: 100%;
       padding: 1rem;
-      border: 2px solid #e0e0e0;
+      border: 2px solid rgba($floral-pink, 0.2);
       border-radius: 8px;
       transition: all 0.3s ease;
       
       &:focus {
         outline: none;
-        border-color: #8A9A5B;
+        border-color: $floral-pink;
       }
     }
 
     .input-feedback {
       margin-top: 0.5rem;
-      color: #666;
+      color: rgba($soft-brown, 0.7);
       font-size: 0.9rem;
     }
   }
@@ -508,11 +525,11 @@
     transition: all 0.3s ease;
     
     &.btn-primary {
-      background: #8A9A5B;
+      background: $floral-pink;
       color: white;
       
       &:hover:not(:disabled) {
-        background: darken(#8A9A5B, 10%);
+        background: darken($floral-pink, 10%);
       }
 
       &:disabled {
@@ -522,20 +539,20 @@
     }
     
     &.btn-secondary {
-      background: #e0e0e0;
-      color: #36454F;
+      background: rgba($soft-brown, 0.1);
+      color: $soft-brown;
       
       &:hover {
-        background: darken(#e0e0e0, 10%);
+        background: rgba($soft-brown, 0.2);
       }
     }
     
     &.btn-success {
-      background: #28a745;
+      background: $sage-green;
       color: white;
       
       &:hover:not(:disabled) {
-        background: darken(#28a745, 10%);
+        background: darken($sage-green, 10%);
       }
 
       &:disabled {
@@ -604,38 +621,41 @@
     padding: 0.5rem;
     position: relative;
     font-size: 0.9rem;
-    color: #666;
+    color: rgba($soft-brown, 0.7);
 
     &::after {
       content: '';
       position: absolute;
       width: 100%;
       height: 2px;
-      background: #ddd;
+      background: rgba($floral-pink, 0.2);
       top: 50%;
       left: 50%;
       z-index: -1;
     }
 
     &.active {
-      color: #2196f3;
+      color: $floral-pink;
       font-weight: bold;
     }
 
     &.completed {
-      color: #4caf50;
+      color: $sage-green;
       &::after {
-        background: #4caf50;
+        background: $sage-green;
       }
     }
   }
 }
 
 .wizard-content {
-  background: white;
-  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 15px;
   padding: 2rem;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.05);
 }
 
 .image-selection {
@@ -719,12 +739,12 @@
         
         .label-text {
           font-weight: 500;
-          color: #36454F;
+          color: $soft-brown;
           font-size: 0.9rem;
         }
         
         .price {
-          color: #8A9A5B;
+          color: $floral-pink;
           font-weight: 600;
           margin-top: 0.2rem;
           font-size: 0.85rem;
@@ -745,11 +765,11 @@
       
       &.selected {
         .item-image {
-          border: 2px solid #8A9A5B;
+          border: 2px solid $floral-pink;
           
           .image-overlay {
             opacity: 1;
-            background: rgba(138, 154, 91, 0.2);
+            background: rgba($floral-pink, 0.2);
             
             .check-icon {
               transform: scale(1);
@@ -759,7 +779,7 @@
         
         .item-label {
           .label-text {
-            color: #8A9A5B;
+            color: $floral-pink;
           }
         }
       }

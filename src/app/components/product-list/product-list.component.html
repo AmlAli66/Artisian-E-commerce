@@ -1,4 +1,4 @@
-<div class="container-fluid py-5">
+<div class="container py-5">
     <!-- Category Navigation -->
     <div class="category-navigation mb-4">
         <div class="category-pill" [class.active]="activeCategory === null" (click)="setActiveCategory(null)">
@@ -84,83 +84,85 @@
             <!-- Products Display -->
             <div [class]="viewMode === 'grid' ? 'product-grid' : 'product-list'">
                 <div *ngFor="let product of displayedProducts" class="product-card">
-                    <div class="product-image">
-                        <img [src]="product.images[0]" [alt]="product.name" class="main-image">
-                        <div class="thumbnail-row" *ngIf="product.images.length > 1">
-                            <img *ngFor="let img of product.images.slice(1, 4)" [src]="img" [alt]="product.name"
-                                class="thumbnail" (click)="switchMainImage(product, img)">
+                    <div class="product-card-main">
+                        <div class="product-image">
+                            <img [src]="product.images[0]" [alt]="product.name" class="main-image">
+                            <div class="thumbnail-row" *ngIf="product.images.length > 1">
+                                <img *ngFor="let img of product.images.slice(1, 4)" [src]="img" [alt]="product.name"
+                                    class="thumbnail" (click)="switchMainImage(product, img)">
+                            </div>
+                            <div class="product-badges" *ngIf="product.featured || product.seasonal">
+                                <span class="badge bg-primary" *ngIf="product.featured">Featured</span>
+                                <span class="badge bg-accent" *ngIf="product.seasonal">Seasonal</span>
+                            </div>
                         </div>
-                        <div class="product-badges" *ngIf="product.featured || product.seasonal">
-                            <span class="badge bg-primary" *ngIf="product.featured">Featured</span>
-                            <span class="badge bg-accent" *ngIf="product.seasonal">Seasonal</span>
-                        </div>
-                    </div>
-                    <div class="product-info">
-                        <h3 class="product-title">{{ product.name }}</h3>
-                        <p class="artist-name" [routerLink]="['/artist', product.artistId]">
-                            By {{ product.artistName }}
-                        </p>
-                        <div class="scent-tags">
-                            <span class="scent-tag" *ngFor="let scent of product.details.scentNotes.slice(0, 3)">
-                                {{ scent }}
-                            </span>
-                        </div>
-                        <p class="product-description">{{ product.description }}</p>
-                        <div class="product-details">
-                            <span class="burn-time">
-                                <i class="fas fa-clock"></i> {{ product.details.burnTime }}
-                            </span>
-                            <span class="weight">
-                                <i class="fas fa-weight-hanging"></i> {{ product.details.weight }}
-                            </span>
-                        </div>
-                        <div class="price-action">
-                            <span class="price">${{ product.price }}</span>
-                            <div class="action-buttons">
-                                <button class="btn btn-outline-primary view-btn"
-                                    [routerLink]="['/products', product.id]">
-                                    View
-                                </button>
-                                <div class="cart-actions">
-                                    <button *ngIf="!isInCart(product.id)" class="btn btn-primary cart-btn"
-                                        (click)="addToCart(product)" [disabled]="!product.inStock"
-                                        [title]="product.inStock ? 'Add to Cart' : 'Out of Stock'">
-                                        <i class="fas fa-shopping-cart"></i>
+                        <div class="product-info">
+                            <h3 class="product-title">{{ product.name }}</h3>
+                            <p class="artist-name" [routerLink]="['/artist', product.artistId]">
+                                By {{ product.artistName }}
+                            </p>
+                            <div class="scent-tags">
+                                <span class="scent-tag" *ngFor="let scent of product.details.scentNotes.slice(0, 3)">
+                                    {{ scent }}
+                                </span>
+                            </div>
+                            <p class="product-description">{{ product.description }}</p>
+                            <div class="product-details">
+                                <span class="burn-time">
+                                    <i class="fas fa-clock"></i> {{ product.details.burnTime }}
+                                </span>
+                                <span class="weight">
+                                    <i class="fas fa-weight-hanging"></i> {{ product.details.weight }}
+                                </span>
+                            </div>
+                            <div class="price-action">
+                                <span class="price">${{ product.price }}</span>
+                                <div class="action-buttons">
+                                    <button class="btn btn-outline-primary view-btn"
+                                        [routerLink]="['/products', product.id]">
+                                        View
                                     </button>
-                                    <div *ngIf="isInCart(product.id)"
-                                        class="quantity-control d-flex align-items-center">
-                                        <button class="btn btn-outline-primary btn-sm"
-                                            (click)="cartService.updateQuantity(product.id, getCartItemQuantity(product.id) - 1)"
-                                            [disabled]="getCartItemQuantity(product.id) <= 1">
-                                            <i class="fas fa-minus"></i>
+                                    <div class="cart-actions">
+                                        <button *ngIf="!isInCart(product.id)" class="btn btn-primary cart-btn"
+                                            (click)="addToCart(product)" [disabled]="!product.inStock"
+                                            [title]="product.inStock ? 'Add to Cart' : 'Out of Stock'">
+                                            <i class="fas fa-shopping-cart"></i>
                                         </button>
-                                        <span class="mx-2">{{ getCartItemQuantity(product.id) }}</span>
-                                        <button class="btn btn-outline-primary btn-sm"
-                                            (click)="cartService.updateQuantity(product.id, getCartItemQuantity(product.id) + 1)">
-                                            <i class="fas fa-plus"></i>
-                                        </button>
-                                        <button class="btn btn-danger btn-sm ms-2"
-                                            (click)="cartService.removeFromCart(product.id)">
-                                            <i class="fas fa-trash"></i>
-                                        </button>
+                                        <div *ngIf="isInCart(product.id)"
+                                            class="quantity-control d-flex align-items-center">
+                                            <button class="btn btn-outline-primary btn-sm"
+                                                (click)="cartService.updateQuantity(product.id, getCartItemQuantity(product.id) - 1)"
+                                                [disabled]="getCartItemQuantity(product.id) <= 1">
+                                                <i class="fas fa-minus"></i>
+                                            </button>
+                                            <span class="mx-2">{{ getCartItemQuantity(product.id) }}</span>
+                                            <button class="btn btn-outline-primary btn-sm"
+                                                (click)="cartService.updateQuantity(product.id, getCartItemQuantity(product.id) + 1)">
+                                                <i class="fas fa-plus"></i>
+                                            </button>
+                                            <button class="btn btn-danger btn-sm ms-2"
+                                                (click)="cartService.removeFromCart(product.id)">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Related Products -->
+                    <!-- Related Products - Now visible in list view only -->
                     <div class="related-products" *ngIf="viewMode === 'list'">
                         <h3>Similar Products</h3>
-                        <div class="related-grid">
-                            <div class="product-card" *ngFor="let related of getRelatedProducts(product)">
-                                <div class="product-image">
-                                    <img [src]="related.images[0]" [alt]="related.name" class="main-image">
+                        <div class="related-grid" [class.related-grid-list]="viewMode === 'list'">
+                            <div class="related-product-card" *ngFor="let related of getRelatedProducts(product)">
+                                <div class="related-product-image">
+                                    <img [src]="related.images[0]" [alt]="related.name">
                                 </div>
-                                <div class="product-info">
-                                    <h3 class="product-title">{{ related.name }}</h3>
-                                    <p class="price">${{ related.price }}</p>
-                                    <button class="btn btn-outline-primary btn-sm"
+                                <div class="related-product-info">
+                                    <h4 class="related-product-title">{{ related.name }}</h4>
+                                    <p class="related-product-price">${{ related.price }}</p>
+                                    <button class="btn btn-outline-primary btn-sm view-related-btn"
                                         [routerLink]="['/products', related.id]">
                                         View
                                     </button>

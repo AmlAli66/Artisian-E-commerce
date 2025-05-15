@@ -1,47 +1,202 @@
-<div class="container mt-4">
-    <h3>Checkout</h3>
+<div class="checkout-container container py-5">
+    <div class="row">
+        <!-- Checkout Form -->
+        <div class="col-lg-8">
+            <div class="checkout-form-container">
+                <h2 class="mb-4">Checkout</h2>
 
-    <div *ngIf="cartItems().length === 0 && !submitted">
-        <p>Your cart is empty.</p>
-        <a routerLink="/" class="btn btn-secondary">Back to Shop</a>
-    </div>
+                <!-- Progress Steps -->
+                <div class="checkout-steps mb-4">
+                    <div class="step" [class.active]="currentStep >= 1" [class.completed]="currentStep > 1">
+                        <div class="step-number">1</div>
+                        <div class="step-label">Shipping</div>
+                    </div>
+                    <div class="step-line"></div>
+                    <div class="step" [class.active]="currentStep >= 2" [class.completed]="currentStep > 2">
+                        <div class="step-number">2</div>
+                        <div class="step-label">Payment</div>
+                    </div>
+                    <div class="step-line"></div>
+                    <div class="step" [class.active]="currentStep === 3">
+                        <div class="step-number">3</div>
+                        <div class="step-label">Review</div>
+                    </div>
+                </div>
 
-    <div *ngIf="cartItems().length > 0 && !submitted">
-        <h5 class="mt-4">Items in your cart:</h5>
-        <ul class="list-group mb-3">
-            <li *ngFor="let item of cartItems()" class="list-group-item d-flex justify-content-between">
-                <div>{{ item.name }} (x{{ item.quantity }})</div>
-                <strong>{{ item.price * item.quantity | currency }}</strong>
-            </li>
-        </ul>
-        <h5>Total: {{ total() | currency }}</h5>
+                <form [formGroup]="checkoutForm" (ngSubmit)="onSubmit()">
+                    <!-- Shipping Information (Step 1) -->
+                    <div class="form-section" *ngIf="currentStep === 1" [@fadeIn]>
+                        <h3 class="mb-3">Shipping Information</h3>
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="firstName" formControlName="firstName"
+                                        placeholder="First Name">
+                                    <label for="firstName">First Name</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="lastName" formControlName="lastName"
+                                        placeholder="Last Name">
+                                    <label for="lastName">Last Name</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="email" class="form-control" id="email" formControlName="email"
+                                        placeholder="Email">
+                                    <label for="email">Email</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="tel" class="form-control" id="phone" formControlName="phone"
+                                        placeholder="Phone">
+                                    <label for="phone">Phone</label>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="address" formControlName="address"
+                                        placeholder="Address">
+                                    <label for="address">Address</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="city" formControlName="city"
+                                        placeholder="City">
+                                    <label for="city">City</label>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="state" formControlName="state"
+                                        placeholder="State">
+                                    <label for="state">State</label>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="zipCode" formControlName="zipCode"
+                                        placeholder="ZIP Code">
+                                    <label for="zipCode">ZIP Code</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-        <form [formGroup]="checkoutForm" (ngSubmit)="placeOrder()" class="mt-4">
-            <div class="mb-3">
-                <label>Full Name</label>
-                <input formControlName="fullName" type="text" class="form-control" />
+                    <!-- Payment Information (Step 2) -->
+                    <div class="form-section" *ngIf="currentStep === 2" [@fadeIn]>
+                        <h3 class="mb-3">Payment Information</h3>
+                        <div class="row g-3">
+                            <div class="col-12">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="cardNumber" formControlName="cardNumber"
+                                        placeholder="Card Number">
+                                    <label for="cardNumber">Card Number</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="cardExpiry" formControlName="cardExpiry"
+                                        placeholder="MM/YY">
+                                    <label for="cardExpiry">Expiry Date (MM/YY)</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="cardCvv" formControlName="cardCvv"
+                                        placeholder="CVV">
+                                    <label for="cardCvv">CVV</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Order Review (Step 3) -->
+                    <div class="form-section" *ngIf="currentStep === 3" [@fadeIn]>
+                        <h3 class="mb-3">Order Review</h3>
+                        <div class="order-review">
+                            <div class="review-section">
+                                <h4>Shipping Details</h4>
+                                <p>{{ checkoutForm.get('firstName')?.value }} {{ checkoutForm.get('lastName')?.value }}
+                                </p>
+                                <p>{{ checkoutForm.get('address')?.value }}</p>
+                                <p>{{ checkoutForm.get('city')?.value }}, {{ checkoutForm.get('state')?.value }} {{
+                                    checkoutForm.get('zipCode')?.value }}</p>
+                                <p>{{ checkoutForm.get('email')?.value }}</p>
+                                <p>{{ checkoutForm.get('phone')?.value }}</p>
+                            </div>
+                            <div class="review-section">
+                                <h4>Order Summary</h4>
+                                <div class="order-items">
+                                    <div *ngFor="let item of cartItems" class="order-item">
+                                        <span>{{ item.name }} × {{ item.quantity }}</span>
+                                        <span>${{ item.price * item.quantity }}</span>
+                                    </div>
+                                </div>
+                                <div class="order-total">
+                                    <span>Total</span>
+                                    <span>${{ cartTotal }}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Form Navigation -->
+                    <div class="form-navigation mt-4">
+                        <button type="button" class="btn btn-outline-primary" *ngIf="currentStep > 1"
+                            (click)="previousStep()">
+                            <i class="fas fa-arrow-left me-2"></i>Back
+                        </button>
+                        <button type="button" class="btn btn-primary" *ngIf="currentStep < 3" (click)="nextStep()"
+                            [disabled]="!validateCurrentStep()">
+                            Continue<i class="fas fa-arrow-right ms-2"></i>
+                        </button>
+                        <button type="submit" class="btn btn-primary" *ngIf="currentStep === 3"
+                            [disabled]="!checkoutForm.valid || processing">
+                            {{ processing ? 'Processing...' : 'Place Order' }}
+                            <i class="fas" [class.fa-spinner]="processing" [class.fa-check]="!processing"></i>
+                        </button>
+                    </div>
+                </form>
             </div>
-            <div class="mb-3">
-                <label>Address</label>
-                <input formControlName="address" type="text" class="form-control" />
-            </div>
-            <div class="mb-3">
-                <label>City</label>
-                <input formControlName="city" type="text" class="form-control" />
-            </div>
-            <div class="mb-3">
-                <label>Email</label>
-                <input formControlName="email" type="email" class="form-control" />
-            </div>
+        </div>
 
-            <button type="submit" class="btn btn-primary" [disabled]="checkoutForm.invalid">
-                Confirm Order
-            </button>
-        </form>
-    </div>
-
-    <div *ngIf="submitted" class="alert alert-success mt-4">
-        <h5>Thank you! Your order has been placed. 🎉</h5>
-        <a routerLink="/" class="btn btn-success mt-3">Back to Home</a>
+        <!-- Order Summary Sidebar -->
+        <div class="col-lg-4" [class.order-first]="isMobile">
+            <div class="order-summary-sidebar">
+                <h3>Order Summary</h3>
+                <div class="summary-items">
+                    <div *ngFor="let item of cartItems" class="summary-item">
+                        <div class="item-info">
+                            <img [src]="(item.images && item.images.length > 0) ? item.images[0] : '/assets/images/placeholder.jpg'"
+                                [alt]="item.name || 'Product image'">
+                            <div class="item-details">
+                                <h4>{{ item.name || 'Unnamed Product' }}</h4>
+                                <p>Quantity: {{ item.quantity || 0 }}</p>
+                            </div>
+                        </div>
+                        <div class="item-price">${{ (item.price || 0) * (item.quantity || 1) }}</div>
+                    </div>
+                </div>
+                <div class="summary-totals">
+                    <div class="summary-line">
+                        <span>Subtotal</span>
+                        <span>${{ cartTotal }}</span>
+                    </div>
+                    <div class="summary-line">
+                        <span>Shipping</span>
+                        <span>Free</span>
+                    </div>
+                    <div class="summary-line total">
+                        <span>Total</span>
+                        <span>${{ cartTotal }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>

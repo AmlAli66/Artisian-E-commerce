@@ -1,159 +1,31 @@
-<!-- <div class="container-fluid  ">
-    <div class="row ">
-        Left Content
-        <div class="col-lg-8 text-center text-lg-start p-5">
-            <h1 class="display-4 fw-bold mb-3" style="font-family: 'Playfair Display', serif;">
-                Light Up Your <br> Space With Comfort
-            </h1>
-            <button class="btn btn-light btn-lg rounded-pill px-4 shadow-sm">Buy Now</button>
+<!-- Floral-inspired Home Page -->
 
-            Features
-            <div class="d-flex flex-wrap gap-3 mt-5">
-                <span class="   badge py-2 px-3">🧴 Cruelty Free</span>
-                <span class=" badge py-2 px-3">🌱 Organic</span>
-                <span class="badge py-2 px-3">🕯️ Paraffin Free</span>
-            </div>
-
-            Category Cards
-            <div class="row mt-5">
-                <div class="col-md-6">
-                    <div class="card rounded-3  d-flex flex-row justify-content-center align-items-center ">
-                        <div class="" style="max-width: 100px;">
-                            <img src="assets/images/candle7.jpeg" class="card-img-top rounded-3 m-3 w-100 h-100"
-                                alt="Accessories">
-                        </div>
-                        <div class="card-body">
-                            <h6>Candles and Accessories</h6>
-                            <button class="btn btn-outline-light btn-sm mt-3 rounded-5" routerLink="/products">Shop
-                                Now</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="card rounded-3  d-flex flex-row justify-content-center align-items-center ">
-                        <div class="" style="max-width: 100px;">
-                            <img src="assets/images/candle1.jpeg" class="card-img-top rounded-3 m-3 w-100 h-100 "
-                                alt="Gift Boxes">
-                        </div>
-                        <div class="card-body">
-                            <h6>Customizable Gift Boxes</h6>
-                            <button class="btn btn-outline-light btn-sm mt-3 rounded-5" routerLink="/custom-order">Shop
-                                Now</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        Right Image Grid
-        <div class="col-lg-4 d-none d-lg-block  grid-section ">
-            <div class="row g-3">
-                <div class="col-6">
-                    <img src="../../../assets/images/candle6.jpeg" class="img-fluid rounded shadow" />
-                    <img src="../../../assets/images/candle3.jpeg" class="img-fluid mt-2 rounded shadow" />
-                    <img src="assets/images/candle8.jpeg" class="img-fluid mt-2 rounded shadow" />
-                </div>
-                <div class="col-6">
-                    <img src="assets/images/candle2.jpeg" class="img-fluid rounded shadow" />
-                    <img src="assets/images/candle7.jpeg" class="img-fluid mt-2 rounded shadow" />
-                    <img src="assets/images/decor1.jpg" class="img-fluid mt-2 rounded shadow" />
-                </div>
-            </div>
-        </div>
-        <section class="why-choose py-5 text-center bg-secondary text-dark">
-            <div class="container">
-                <h2 class="mb-4">Why Choose Us?</h2>
-                <div class="row">
-                    <div class="col-md-4">
-                        <img src="assets/icons/handcrafted.svg" height="50" alt="handcrafted" />
-                        <p class="mt-2">Artisan Handcrafted Candles</p>
-                    </div>
-                    <div class="col-md-4">
-                        <img src="assets/icons/custom.svg" height="50" alt="custom order" />
-                        <p class="mt-2">Custom Order Options</p>
-                    </div>
-                    <div class="col-md-4">
-                        <img src="assets/icons/scent.svg" height="50" alt="unique scents" />
-                        <p class="mt-2">Unique Scents Blended with Love</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <section class="cta py-5 text-center">
-            <h2>Design Your Custom Candle</h2>
-            <p>Choose your scent, size, and style—made just for you.</p>
-            <button class="btn btn-accent btn-lg">Start Custom Order</button>
-        </section>
+<!-- Hero Section with Glassmorphism -->
+<div class="hero-section pt-0">
+    <!-- Decorative SVG Elements -->
+    <div class="floral-svg-elements">
+        <div class="floral-element top-right"></div>
+        <div class="floral-element bottom-left"></div>
     </div>
-</div> -->
 
-<!-- Home Component -->
-<!-- <section class="hero text-center d-flex flex-column justify-content-center align-items-center">
-    <h1 class="display-4">Welcome to Scented Reverie</h1>
-    <p class="lead">Handcrafted candles that awaken your senses.</p>
-    <button class="btn btn-lg btn-primary mt-3">Explore Our Collection</button>
-</section>
-
-<section class="featured py-5 container">
-    <h2 class="text-center mb-4">Featured Candles</h2>
-    <div class="row">
-        <div class="col-md-4 mb-4" *ngFor="let product of featuredProducts">
-            <div class="card product-card animate__animated animate__fadeInUp">
-                <img [src]="product.image" class="card-img-top" alt="Candle image" />
-                <div class="card-body">
-                    <h5 class="card-title">{{ product.name }}</h5>
-                    <p class="card-text">{{ product.description }}</p>
-                    <button class="btn btn-outline-primary">View Details</button>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<section class="why-choose py-5 text-center bg-secondary text-dark">
     <div class="container">
-        <h2 class="mb-4">Why Choose Us?</h2>
-        <div class="row">
-            <div class="col-md-4">
-                <img src="assets/icons/handcrafted.svg" height="50" alt="handcrafted" />
-                <p class="mt-2">Artisan Handcrafted Candles</p>
-            </div>
-            <div class="col-md-4">
-                <img src="assets/icons/custom.svg" height="50" alt="custom order" />
-                <p class="mt-2">Custom Order Options</p>
-            </div>
-            <div class="col-md-4">
-                <img src="assets/icons/scent.svg" height="50" alt="unique scents" />
-                <p class="mt-2">Unique Scents Blended with Love</p>
-            </div>
-        </div>
-    </div>
-</section>
-
-<section class="cta py-5 text-center">
-    <h2>Design Your Custom Candle</h2>
-    <p>Choose your scent, size, and style—made just for you.</p>
-    <button class="btn btn-accent btn-lg">Start Custom Order</button>
-</section> -->
-
-<div class="hero-section">
-    <div class="container">
-        <div class="row align-items-center ">
+        <div class="row align-items-center">
             <div class="col-lg-6 hero-content">
-                <h1 class="display-3 mb-4 animate-fade-in">Welcome to <br><span class="brand-text">Scented
-                        Reverie</span></h1>
-                <p class="lead mb-4 animate-fade-in-delay">Discover our artisanal collection of hand-crafted candles,
-                    where each piece tells a unique story through enchanting fragrances and elegant designs.</p>
+                <!-- <span class="pre-heading animate-fade-in">Handcrafted with love</span> -->
+                <h1 class="mb-4 animate-fade-in">Search for the best <br><span class="brand-text">complement to your
+                        home</span></h1>
+                <p class="lead mb-4 animate-fade-in-delay">Each candle is crafted with natural materials and artisanal
+                    care, designed to create a peaceful and enchanting ambiance in your space.</p>
                 <div class="hero-buttons animate-fade-in-delay-2">
                     <button class="btn btn-primary me-3" routerLink="/products">Explore Collection</button>
                     <button class="btn btn-outline-primary" routerLink="/custom-order">Custom Order</button>
                 </div>
                 <div class="features mt-5 animate-fade-in-delay-3">
                     <span class="feature-badge">
-                        <i class="fas fa-leaf"></i> Eco-Friendly
+                        <i class="fas fa-leaf"></i> Handmade
                     </span>
                     <span class="feature-badge">
-                        <i class="fas fa-heart"></i> Handcrafted
+                        <i class="fas fa-heart"></i> Natural Materials
                     </span>
                     <span class="feature-badge">
                         <i class="fas fa-star"></i> Premium Quality
@@ -161,24 +33,40 @@
                 </div>
             </div>
             <div class="col-lg-6 hero-image">
-                <div class="image-grid">
-                    <img src="assets/images/candle1.jpeg" alt="Luxury Candle" class="grid-img animate-float">
-                    <img src="assets/images/candle2.jpeg" alt="Artisan Candle" class="grid-img animate-float delay-1">
-                    <img src="assets/images/candle3.jpeg" alt="Custom Candle" class="grid-img animate-float delay-2">
+                <div class="hero-images-container">
+                    <div class="hero-image-main glass-card animate-float">
+                        <img src="assets/images/main-home.jpg" alt="Luxury Candle">
+                    </div>
+                    <div class="hero-image-accent top glass-card animate-float delay-1">
+                        <img src="assets/images/candle2.jpeg" alt="Artisan Candle">
+                    </div>
+                    <div class="hero-image-accent bottom glass-card animate-float delay-2">
+                        <img src="assets/images/candle3.jpeg" alt="Custom Candle">
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
 
-<section class="featured-products py-5">
+<!-- Floral Divider -->
+<div class="floral-divider top"></div>
+
+<!-- Featured Collections -->
+<section class="featured-products bg-soft-rose">
     <div class="container">
-        <h2 class="text-center mb-5">Featured Collections</h2>
+        <div class="section-header text-center mb-5">
+            <span class="subheading">Our Selections</span>
+            <h2 class="text-gradient">Featured Collections</h2>
+            <div class="divider-accent"></div>
+        </div>
+
         <div class="row g-4">
             <div class="col-md-4">
-                <div class="collection-card">
+                <div class="collection-card glass-card">
                     <div class="card-image">
                         <img src="assets/images/candle6.jpeg" alt="Signature Collection">
+                        <div class="card-overlay"></div>
                     </div>
                     <div class="card-content">
                         <h3>Signature Collection</h3>
@@ -188,9 +76,10 @@
                 </div>
             </div>
             <div class="col-md-4">
-                <div class="collection-card">
+                <div class="collection-card glass-card">
                     <div class="card-image">
-                        <img src="assets/images/candle7.jpeg" alt="Seasonal Editions">
+                        <img src="assets/images/Seasonal Editions.jpg" alt="Seasonal Editions">
+                        <div class="card-overlay"></div>
                     </div>
                     <div class="card-content">
                         <h3>Seasonal Editions</h3>
@@ -200,9 +89,10 @@
                 </div>
             </div>
             <div class="col-md-4">
-                <div class="collection-card">
+                <div class="collection-card glass-card">
                     <div class="card-image">
                         <img src="assets/images/candle8.jpeg" alt="Gift Sets">
+                        <div class="card-overlay"></div>
                     </div>
                     <div class="card-content">
                         <h3>Gift Sets</h3>
@@ -215,82 +105,285 @@
     </div>
 </section>
 
-<section class="artisan-feature py-5 bg-light">
+<!-- Floral Divider -->
+<div class="floral-divider bottom"></div>
+
+<!-- Artisan Feature Section -->
+<section class="artisan-feature">
     <div class="container">
         <div class="row align-items-center">
-            <div class="col-md-6">
+            <div class="col-lg-6">
                 <div class="artisan-image-container">
-                    <img src="assets/images/decor1.jpg" alt="Artisan Crafting Process"
-                        class="img-fluid rounded-3 main-image">
-                    <div class="process-images mt-4 row g-3">
-                        <div class="col-4">
-                            <img src="assets/images/candle1.jpeg" alt="Wax Selection" class="img-fluid rounded-3"
-                                title="Premium Wax Selection">
+                    <div class="main-image glass-card">
+                        <img src="assets/images/home.jpg" alt="Artisan Crafting Process" class="img-fluid">
+                    </div>
+                    <div class="process-images">
+                        <div class="process-image glass-card">
+                            <img src="assets/images/cozy mood.jpg" alt="Wax Selection" class="img-fluid">
                         </div>
-                        <div class="col-4">
-                            <img src="assets/images/candle1.jpeg" alt="Fragrance Blending" class="img-fluid rounded-3"
-                                title="Fragrance Blending">
+                        <div class="process-image glass-card">
+                            <img src="assets/images/cozy mood 3.jpg" alt="Fragrance Blending" class="img-fluid">
                         </div>
-                        <div class="col-4">
-                            <img src="assets/images/candle1.jpeg" alt="Final Touches" class="img-fluid rounded-3"
-                                title="Finishing Details">
+                        <div class="process-image glass-card">
+                            <img src="assets/images/cozy mood 4.jpg" alt="Final Touches" class="img-fluid">
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-md-6">
+            <div class="col-lg-6">
                 <span class="craft-badge">Artisanal Excellence</span>
-                <h2 class="mb-4">The Art of Candle Making</h2>
+                <h2 class="mb-4">The Art of <span class="text-gradient">Candle Making</span></h2>
                 <p class="lead mb-4">At Scented Reverie, each candle is a masterpiece of craftsmanship, created through
                     a meticulous process that honors traditional techniques while embracing modern sustainability.</p>
 
                 <div class="crafting-process">
                     <div class="process-step">
-                        <i class="fas fa-seedling text-primary"></i>
+                        <div class="step-icon">
+                            <i class="fas fa-seedling"></i>
+                        </div>
                         <div class="step-content">
-                            <h4>Sustainable Materials</h4>
-                            <p>We carefully source eco-friendly soy and beeswax, supporting local suppliers and ensuring
-                                the highest quality ingredients.</p>
+                            <h4>Ethically Sourced Materials</h4>
+                            <p>We select only the finest organic soy wax, cotton wicks, and natural essential oils.</p>
                         </div>
                     </div>
 
                     <div class="process-step">
-                        <i class="fas fa-mortar-pestle text-primary"></i>
+                        <div class="step-icon">
+                            <i class="fas fa-mortar-pestle"></i>
+                        </div>
                         <div class="step-content">
-                            <h4>Artisanal Blending</h4>
-                            <p>Our master craftspeople blend unique fragrances using essential oils and natural
-                                botanicals, creating signature scents that tell a story.</p>
+                            <h4>Handcrafted Scent Blends</h4>
+                            <p>Our artisans carefully blend unique fragrance combinations that evoke emotion and memory.
+                            </p>
                         </div>
                     </div>
 
                     <div class="process-step">
-                        <i class="fas fa-hand-holding-heart text-primary"></i>
+                        <div class="step-icon">
+                            <i class="fas fa-paint-brush"></i>
+                        </div>
                         <div class="step-content">
-                            <h4>Handcrafted Care</h4>
-                            <p>Each candle is hand-poured in small batches, ensuring perfect consistency and attention
-                                to detail in every piece.</p>
+                            <h4>Artistic Finishing</h4>
+                            <p>Each candle receives thoughtful decoration and packaging to create a beautiful gift.</p>
                         </div>
                     </div>
-                </div>
-
-                <div class="mt-4">
-                    <button class="btn btn-primary me-3" routerLink="/our-process">Explore Our Process</button>
-                    <button class="btn btn-outline-primary" routerLink="/custom-order">Create Custom Order</button>
                 </div>
             </div>
         </div>
     </div>
 </section>
 
-<section class="newsletter-section py-5">
-    <div class="container text-center">
-        <h2 class="mb-4">Join Our Community</h2>
-        <p class="lead mb-4">Subscribe to receive updates on new collections, special offers, and artisan stories.</p>
-        <div class="row justify-content-center">
-            <div class="col-md-6">
-                <div class="input-group mb-3">
-                    <input type="email" class="form-control" placeholder="Enter your email">
-                    <button class="btn btn-primary" type="button">Subscribe</button>
+<!-- Floral Divider -->
+<div class="floral-divider top"></div>
+
+<!-- Custom Order CTA -->
+<section class="custom-order-cta bg-soft-beige">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mx-auto text-center">
+                <h2 class="mb-4">Design Your <span class="text-gradient">Perfect Candle</span></h2>
+                <p class="lead mb-5">Create a personalized candle that perfectly matches your style, scent preferences,
+                    and home decor. Our custom order process gives you complete creative control.</p>
+                <button class="btn btn-primary btn-lg" routerLink="/custom-order">Start Custom Order</button>
+            </div>
+        </div>
+
+        <div class="custom-features mt-5">
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="custom-feature glass-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-palette"></i>
+                        </div>
+                        <h4>Choose Your Design</h4>
+                        <p>Select colors, containers, and decorative elements</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="custom-feature glass-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-wind"></i>
+                        </div>
+                        <h4>Craft Your Scent</h4>
+                        <p>Mix and match from our library of premium fragrances</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="custom-feature glass-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-gift"></i>
+                        </div>
+                        <h4>Personalize</h4>
+                        <p>Add special messages or dedications</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Floral Divider -->
+<div class="floral-divider bottom"></div>
+
+<!-- Gallery Section -->
+<section class="inspiration-gallery">
+    <div class="container">
+        <div class="section-header text-center mb-5">
+            <span class="subheading">Inspiration</span>
+            <h2 class="text-gradient">Candle Gallery</h2>
+            <div class="divider-accent"></div>
+            <p class="gallery-subtitle mt-3">Discover our artisan creations and get inspired by our handcrafted candles
+            </p>
+        </div>
+
+        <div class="gallery-masonry">
+            <div class="row g-4">
+                <div class="col-lg-6 col-md-6">
+                    <div class="gallery-card">
+                        <div class="glass-card gallery-card-main">
+                            <img src="assets/images/candle6.jpeg" alt="Luxury Candle">
+                            <div class="gallery-overlay">
+                                <div class="gallery-caption">
+                                    <h5>Amber Collection</h5>
+                                    <p>Luxury Edition</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-6 col-md-6">
+                    <div class="row g-4">
+                        <div class="col-md-6 col-6">
+                            <div class="gallery-card">
+                                <div class="glass-card gallery-card-small">
+                                    <img src="assets/images/candle2.jpeg" alt="Scented Candle">
+                                    <div class="gallery-overlay">
+                                        <div class="gallery-caption">
+                                            <h5>Rose Gold</h5>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-6">
+                            <div class="gallery-card">
+                                <div class="glass-card gallery-card-small">
+                                    <img src="assets/images/candle3.jpeg" alt="Artisan Candle">
+                                    <div class="gallery-overlay">
+                                        <div class="gallery-caption">
+                                            <h5>Lavender Dream</h5>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-6">
+                            <div class="gallery-card">
+                                <div class="glass-card gallery-card-small">
+                                    <img src="assets/images/candle7.jpeg" alt="Decorative Candle">
+                                    <div class="gallery-overlay">
+                                        <div class="gallery-caption">
+                                            <h5>Herbal Essence</h5>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-6">
+                            <div class="gallery-card">
+                                <div class="glass-card gallery-card-small">
+                                    <img src="assets/images/decor1.jpg" alt="Home Decor">
+                                    <div class="gallery-overlay">
+                                        <div class="gallery-caption">
+                                            <h5>Zen Collection</h5>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="gallery-cta text-center mt-5">
+            <p class="mb-4">Explore our complete collection of handcrafted candles</p>
+            <button class="btn btn-outline-primary gallery-btn" routerLink="/products">
+                <i class="fas fa-flame me-2"></i>View All Products
+            </button>
+        </div>
+    </div>
+</section>
+
+<!-- Floral Divider -->
+<div class="floral-divider top"></div>
+
+<!-- Testimonials -->
+<section class="testimonials bg-soft-rose">
+    <div class="container">
+        <div class="section-header text-center mb-5">
+            <span class="subheading">Loved By Many</span>
+            <h2 class="text-gradient">Customer Experiences</h2>
+            <div class="divider-accent"></div>
+        </div>
+
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="testimonial-card glass-card">
+                    <div class="testimonial-content">
+                        <div class="rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <p>"These candles transformed my living space into a sanctuary. The scents are subtle yet
+                            captivating, and I love how beautifully they blend into my home decor."</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <h4>Emily R.</h4>
+                        <p>Loyal Customer</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="testimonial-card glass-card">
+                    <div class="testimonial-content">
+                        <div class="rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <p>"I ordered a custom candle for my mother's birthday, and the attention to detail was
+                            remarkable. From the packaging to the scent, everything was perfect."</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <h4>James T.</h4>
+                        <p>Custom Order</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="testimonial-card glass-card">
+                    <div class="testimonial-content">
+                        <div class="rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <p>"As someone who's sensitive to artificial scents, finding these all-natural candles has been
+                            a game-changer. They fill my home with gentle fragrance without being overwhelming."</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <h4>Sarah L.</h4>
+                        <p>Repeat Customer</p>
+                    </div>
                 </div>
             </div>
         </div>

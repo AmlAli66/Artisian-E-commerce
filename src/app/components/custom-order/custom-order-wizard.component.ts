@@ -97,18 +97,24 @@ export class CustomOrderWizardComponent implements OnInit {
     { path: '/assets/images/shapes/shape 9.jpg', value: 'shape 9', label: 'Unique Shape' },
     { path: '/assets/images/shapes/shape 10.jpg', value: 'shape 10', label: 'Premium Shape' },
     { path: '/assets/images/shapes/shape 11.jpg', value: 'shape 11', label: 'Luxury Shape' },
-    { path: '/assets/images/shapes/shape 12.jpg', value: 'shape 12', label: 'Designer Shape' }
+    { path: '/assets/images/shapes/shape 12.jpg', value: 'shape 12', label: 'Designer Shape' },
+    { path: '/assets/images/shapes/lotus.jpg', value: 'lotus', label: 'lotus Shape' },
+    { path: '/assets/images/shapes/Adamova Bear.jpg', value: 'Adamova Bear', label: 'Adamova Bear Shape' },
+    { path: '/assets/images/shapes/Adamova Heart.jpg', value: 'Adamova Heart', label: 'Adamova Heart Shape' },
   ];
 
   containerImages: ImageItem[] = [
     { path: 'assets/images/containers/glass.jpg', value: 'glass', label: 'Classic Glass', price: 0 },
     // { path: '/assets/images/containers/premium.jpg', value: 'premium', label: 'Premium Container', price: 15 },
     // { path: '/assets/images/containers/modern.jpg', value: 'modern', label: 'Modern Design', price: 12 },
-    // { path: '/assets/images/containers/elegant.jpg', value: 'elegant', label: 'Elegant Container', price: 18 },
     { path: '/assets/images/containers/luxury.jpg', value: 'luxury', label: 'Luxury Edition', price: 25 },
+    { path: '/assets/images/containers/elegant.jpg', value: 'elegant', label: 'Elegant Container', price: 18 },
     { path: '/assets/images/containers/vintage.jpg', value: 'vintage', label: 'Vintage Style', price: 20 },
     { path: '/assets/images/containers/artisan.jpg', value: 'artisan', label: 'Artisan Collection', price: 22 },
-    { path: '/assets/images/containers/designer.jpg', value: 'designer', label: 'Designer Series', price: 28 }
+    { path: '/assets/images/containers/designer.jpg', value: 'designer', label: 'Designer Series', price: 28 },
+    { path: '/assets/images/containers/elegant ceramic.jpg', value: 'elegant ceramic', label: 'Elegant ceramic', price: 30 },
+    { path: '/assets/images/containers/swan.jpg', value: 'swan', label: 'Swan Container', price: 32 },
+    { path: '/assets/images/containers/sea coasters.jpg', value: 'sea coasters', label: 'sea coasters', price: 32 },
   ];
 
   sizes = [

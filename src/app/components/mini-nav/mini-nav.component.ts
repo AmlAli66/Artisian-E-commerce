@@ -1,8 +1,9 @@
-import { Component, OnInit, OnDestroy, HostListener } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { RouterModule, Router, NavigationEnd } from '@angular/router';
 import { CartService } from '../../services/cart.service';
 import { Subscription } from 'rxjs';
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-mini-nav',
@@ -12,8 +13,7 @@ import { Subscription } from 'rxjs';
     <nav class="mini-nav" [class.visible]="isVisible">
       <ul class="nav-list">
         <li>
-          <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"
-             title="Home">
+          <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" title="Home">
             <i class="fas fa-home"></i>
           </a>
         </li>
@@ -47,16 +47,20 @@ import { Subscription } from 'rxjs';
       left: 0;
       top: 50%;
       transform: translateY(-50%) translateX(-100%);
-      background: rgba(255, 255, 255, 0.95);
+      background: rgba(255, 255, 255, 0.8);
       backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
       padding: 1rem 0.5rem;
       border-radius: 0 15px 15px 0;
-      box-shadow: 2px 0 20px rgba(0, 0, 0, 0.1);
-      z-index: 1025;
-      transition: transform 0.3s ease-in-out;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 2px 0 20px rgba(233, 183, 183, 0.1);
+      z-index: 3025;
+      transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+      opacity: 0;
 
       &.visible {
         transform: translateY(-50%) translateX(0);
+        opacity: 1;
       }
 
       .nav-list {
@@ -75,7 +79,7 @@ import { Subscription } from 'rxjs';
             width: 40px;
             height: 40px;
             border-radius: 50%;
-            color: #36454F;
+            color: #8C6B5C;
             text-decoration: none;
             transition: all 0.3s ease;
             position: relative;
@@ -85,8 +89,20 @@ import { Subscription } from 'rxjs';
             }
 
             &:hover, &.active {
-              color: #8A9A5B;
-              background: rgba(138, 154, 91, 0.1);
+              color: #E9B7B7;
+              background: rgba(233, 183, 183, 0.1);
+            }
+
+            &.active::after {
+              content: '';
+              position: absolute;
+              right: -5px;
+              top: 50%;
+              transform: translateY(-50%);
+              width: 3px;
+              height: 20px;
+              background: linear-gradient(to bottom, #E9B7B7, #A8B79E);
+              border-radius: 3px;
             }
 
             &.cart-icon {
@@ -94,7 +110,7 @@ import { Subscription } from 'rxjs';
                 position: absolute;
                 top: -5px;
                 right: -5px;
-                background: #D4AF37;
+                background: linear-gradient(135deg, #E9B7B7, #A8B79E);
                 color: white;
                 font-size: 0.7rem;
                 padding: 0.2rem 0.4rem;
@@ -112,38 +128,40 @@ import { Subscription } from 'rxjs';
 export class MiniNavComponent implements OnInit, OnDestroy {
   isVisible: boolean = false;
   cartItemsCount: number = 0;
-  private cartSubscription: Subscription;
-  private lastScrollTop: number = 0;
-  private readonly SHOW_THRESHOLD = window.innerHeight; // Show after first viewport
 
-  constructor(private cartService: CartService) {
+  private cartSubscription!: Subscription;
+  private routerSubscription!: Subscription;
+  private readonly SHOW_THRESHOLD = 100;
+
+  constructor(private cartService: CartService, private router: Router) {}
+
+  ngOnInit(): void {
+    this.handleScroll();
+
+    // listen to scroll globally
+    window.addEventListener('scroll', this.handleScroll, true);
+
+    // listen to route change
+    this.routerSubscription = this.router.events.pipe(
+      filter(event => event instanceof NavigationEnd)
+    ).subscribe(() => {
+      // wait a moment for content to load then recheck scroll
+      setTimeout(() => this.handleScroll(), 100);
+    });
+
     this.cartSubscription = this.cartService.getCartItems().subscribe(items => {
       this.cartItemsCount = items.reduce((total, item) => total + item.quantity, 0);
     });
   }
 
-  @HostListener('window:scroll', ['$event'])
-  onScroll() {
-    const st = window.scrollY;
-    
-    // Show mini nav when scrolled past first viewport and scrolling down
-    if (st > this.SHOW_THRESHOLD) {
-      this.isVisible = true;
-    } else {
-      this.isVisible = false;
-    }
-    
-    this.lastScrollTop = st;
-  }
-
-  ngOnInit(): void {
-    // Check initial scroll position
-    this.onScroll();
-  }
-
   ngOnDestroy(): void {
-    if (this.cartSubscription) {
-      this.cartSubscription.unsubscribe();
-    }
+    if (this.cartSubscription) this.cartSubscription.unsubscribe();
+    if (this.routerSubscription) this.routerSubscription.unsubscribe();
+    window.removeEventListener('scroll', this.handleScroll, true);
   }
-} 
+
+  handleScroll = (): void => {
+    const scrollY = window.scrollY || window.pageYOffset;
+    this.isVisible = scrollY > this.SHOW_THRESHOLD;
+  };
+}
