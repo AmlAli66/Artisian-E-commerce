@@ -879,7 +879,7 @@ $soft-brown: #8C6B5C;
     }
 
     &.selected {
-      border-color: #2196f3;
+      border-color: $floral-pink;
       background: #e3f2fd;
     }
 
@@ -925,7 +925,7 @@ $soft-brown: #8C6B5C;
     }
 
     &.selected {
-      border-color: #2196f3;
+      border-color: $floral-pink;
       transform: scale(1.1);
     }
 
@@ -1015,11 +1015,11 @@ $soft-brown: #8C6B5C;
     }
 
     &.btn-primary {
-      background: #2196f3;
+      background: $floral-pink;
       color: white;
 
       &:hover:not(:disabled) {
-        background: #1976d2;
+        background: $floral-pink;
       }
     }
 
@@ -1063,11 +1063,11 @@ $soft-brown: #8C6B5C;
       }
 
       &.selected {
-        border-color: #2196f3;
+        border-color: $floral-pink;
         background: #e3f2fd;
 
         i {
-          color: #2196f3;
+          color: $floral-pink;
         }
       }
 
@@ -1108,11 +1108,11 @@ $soft-brown: #8C6B5C;
     }
 
     &.selected {
-      border-color: #2196f3;
+      border-color: $floral-pink;
       background: #e3f2fd;
 
       i {
-        color: #2196f3;
+        color: $floral-pink;
       }
     }
 
@@ -1150,7 +1150,7 @@ $soft-brown: #8C6B5C;
     }
 
     &.selected {
-      border-color: #2196f3;
+      border-color: $floral-pink;
       background: #e3f2fd;
     }
 
