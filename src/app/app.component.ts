@@ -168,7 +168,7 @@ const routeTransitionAnimations = trigger('routeAnimations', [
   template: `
     <div class="main-container">
       <app-navbar></app-navbar>
-      <app-mini-nav></app-mini-nav>
+      <!-- <app-mini-nav></app-mini-nav> -->
       <div class="content-container">
         <div class="route-container page-transition-ready" [@routeAnimations]="prepareRoute(outlet)">
           <router-outlet #outlet="outlet"></router-outlet>
